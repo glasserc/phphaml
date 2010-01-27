@@ -748,7 +748,9 @@ class HamlParser
 				$sParsed = "\n";
 		else
 		{
-			$aAttributes = array();
+			$aAttributes = array(
+			  '_inline' => array()
+			);
 			$sAttributes = '';
 			$sTag = 'div';
 			$sToParse = '';
@@ -763,10 +765,15 @@ class HamlParser
 				foreach ($aOptions as $sOption)
 				{
 					$aOption = explode(self::TOKEN_OPTION_VALUE, trim($sOption), 2);
-					foreach ($aOption as $k => $o)
-						$aOption[$k] = trim($o);
-					$sOptionName = ltrim($aOption[0], self::TOKEN_OPTION);
-					$aAttributes[$sOptionName] = trim($aOption[1], self::TOKEN_OPTION);
+					if(count($aOption) == 1 && strpos($sOption, "$") !== FALSE){ // Use "$" to try to avaid the comma-in-quotes problem
+						$aAttributes['_inline'][] = $sOption;
+					}
+					else {
+						foreach ($aOption as $k => $o)
+							$aOption[$k] = trim($o);
+						$sOptionName = ltrim($aOption[0], self::TOKEN_OPTION);
+						$aAttributes[$sOptionName] = trim($aOption[1], self::TOKEN_OPTION);
+					}
 				}
 			}
 
@@ -846,8 +853,10 @@ class HamlParser
 				if (preg_match('/\\'.self::TOKEN_AUTO_LEFT.'(.*?)\\'.self::TOKEN_AUTO_RIGHT.'/', $sToParse, $aMatches) && $this->embedCode())
 					$sAutoVar = $aMatches[1];
 
-				if (!empty($aAttributes) || !empty($sAutoVar))
-					$sAttributes = '<?php $this->writeAttributes('.$this->arrayExport($aAttributes).(!empty($sAutoVar) ? ", \$this->parseSquareBrackets($sAutoVar)" : '' ).'); ?>';
+				$inline = $aAttributes['_inline'];
+				unset($aAttributes['_inline']);
+				if (!empty($aAttributes) || !empty($sAutoVar) || !empty($inline))
+					$sAttributes = '<?php $this->writeAttributes('.$this->arrayExport($aAttributes).(!empty($sAutoVar) ? ", \$this->parseSquareBrackets($sAutoVar)" : '' ).(!empty($inline)? ', ' . implode($inline, ', ') : '') . '); ?>';
 				$this->bBlock = $this->oParent->bBlock;
 				$iLevelM = $this->oParent->bBlock || $this->bBlock ? -1 : 0;
 				// Check for closed tag

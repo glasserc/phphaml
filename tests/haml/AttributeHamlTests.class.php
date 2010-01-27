@@ -89,6 +89,16 @@ final class AttributeHamlTests extends PHPUnit_Framework_TestCase
 		$this->parser->setSource('%input{ :style => "font-size: $size;", :name => $name }');
 		$this->assertEquals('<input name="foo" style="font-size: 16;" />', $this->parser->fetch());
 	}
+
+	/**
+	 * Test passing arrays of attributes
+	 */
+	public function testAttributesArary()
+	{
+		$this->parser->assign('attrs', array('name' => 'foo', 'style' => 'font-size: 16;'));
+		$this->parser->setSource('%input{ :type => "text", $attrs }');
+		$this->assertEquals('<input name="foo" style="font-size: 16;" type="text" />', $this->parser->fetch());
+	}
 	
 	/**
 	 * Test attributes stack

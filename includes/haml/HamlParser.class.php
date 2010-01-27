@@ -761,7 +761,7 @@ class HamlParser
 			while (preg_match('/\\'.self::TOKEN_OPTIONS_LEFT.'(.*?)\\'.self::TOKEN_OPTIONS_RIGHT.'/', $sSource, $aMatches))
 			{
 				$sSource = str_replace($aMatches[0], '', $sSource);
-				$aOptions = explode(self::TOKEN_OPTIONS_SEPARATOR, $aMatches[1]);
+				$aOptions = preg_split('/'.self::TOKEN_OPTIONS_SEPARATOR.'/', $aMatches[1]);
 				foreach ($aOptions as $sOption)
 				{
 					$aOption = explode(self::TOKEN_OPTION_VALUE, trim($sOption), 2);
@@ -1110,7 +1110,7 @@ class HamlParser
 	/**
 	 * Options separator
 	 */
-	const TOKEN_OPTIONS_SEPARATOR = ',';
+	const TOKEN_OPTIONS_SEPARATOR = ',\s*(:| )';
 
 	/**
 	 * Start option name

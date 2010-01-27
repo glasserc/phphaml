@@ -567,7 +567,7 @@ class HamlParser
 		}
 		foreach ($this->aChildren as $oChild)
 			$sCompiled .= $oChild->render();
-		$sCompiled = preg_replace('|<\?php \} \?>\s*?<\?php else \{ \?>|ius', '<?php } else { ?>', $sCompiled);
+		$sCompiled = preg_replace('|<\?php \} \?>\s*?<\?php else \{\s*\?>|ius', '<?php } else { ?>', $sCompiled);
 		return $sCompiled;
 	}
 
@@ -730,7 +730,7 @@ class HamlParser
 			// Check for block
 			if (preg_match('/^('.implode('|', self::$aPhpBlocks).')/', $aMatches[1]))
 			  $this->bBlock = $bBlock = true;
-			$sParsedBegin = '<?php ' . $this->indent($aMatches[1] . ($bBlock ? ' {' : ';'), -2, false)  . '?>';
+			$sParsedBegin = '<?php ' . $this->indent($aMatches[1] . ($bBlock ? ' { ' : ';'), -2, false)  . '?>';
 			if ($bBlock)
 			  $sParsedEnd = '<?php } ?>';
 		} else

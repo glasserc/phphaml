@@ -27,7 +27,6 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals("<p>Hi</p>\n|\nthere", $this->parser->fetch());
 	}
 
-
 	public function testMultilineChain()
 	{
 		$this->parser->setSource("%p Hi |\n|\nthere");
@@ -35,4 +34,9 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		//$this->assertEquals("<p>Hi |</p>\nthere", $this->parser->fetch());
 	}
 
+	public function testElseSafe()
+	{
+		$this->parser->setSource("- if(false)\n  Hi!\n- else\n  Bye!");
+		$this->assertEquals("  Bye!", $this->parser->fetch()); // FIXME: whitespace?
+	}
 }

@@ -93,7 +93,7 @@ final class AttributeHamlTests extends PHPUnit_Framework_TestCase
 	/**
 	 * Test passing arrays of attributes
 	 */
-	public function testAttributesArary()
+	public function testAttributesArray()
 	{
 		$this->parser->assign('attrs', array('name' => 'foo', 'style' => 'font-size: 16;'));
 		$this->parser->setSource('%input{ :type => "text", $attrs }');

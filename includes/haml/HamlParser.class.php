@@ -512,7 +512,7 @@ class HamlParser
 	 */
 	protected function parseBreak($sFile)
 	{
-		$sFile = preg_replace('/\\'.self::TOKEN_BREAK.'\s*/', '', $sFile);
+		$sFile = preg_replace('/(\w+) +\\'.self::TOKEN_BREAK.'[ \t]*\n[ \t]*/', '\\1 ', $sFile);
 		return $sFile;
 	}
 
@@ -770,7 +770,7 @@ class HamlParser
 				}
 			}
 
-			$sFirst = '['.self::TOKEN_TAG.'|'.self::TOKEN_ID.'|'.self::TOKEN_CLASS.'|'.self::TOKEN_PARSE_PHP.']';
+			$sFirst = '['.self::TOKEN_TAG.self::TOKEN_ID.self::TOKEN_CLASS.self::TOKEN_PARSE_PHP.']';
 
 			if (preg_match("/^($sFirst.*?) (.*)/", $sSource, $aMatches))
 			{

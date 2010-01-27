@@ -820,7 +820,7 @@ class HamlParser
 				if (preg_match_all('/'.self::TOKEN_TAG.'([a-zA-Z0-9:\-_]*)/', $sToParse, $aMatches))
 					$this->sTag = $sTag = end($aMatches[1]); // it's stack
 				// Match ID
-				if (preg_match_all('/'.self::TOKEN_ID.'([a-zA-Z0-9_]*)/', $sToParse, $aMatches))
+				if (preg_match_all('/'.self::TOKEN_ID.'([a-zA-Z0-9\-_]*)/', $sToParse, $aMatches))
 					$aAttributes['id'] = '\''.end($aMatches[1]).'\''; // it's stack
 				// Match classes
 				if (preg_match_all('/\\'.self::TOKEN_CLASS.'([a-zA-Z0-9\-_]*)/', $sToParse, $aMatches))

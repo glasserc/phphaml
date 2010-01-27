@@ -78,6 +78,15 @@ final class TagHamlTests extends PHPUnit_Framework_TestCase
 		$this->parser->setSource("#foo\n  hello");
 		$this->assertEquals("<div id=\"foo\">\n  hello\n</div>", $this->parser->fetch());
 	}
+
+	/**
+	 * Test tag without name, but with ID (generate div)
+	 */
+	public function testIdTagDashes()
+	{
+		$this->parser->setSource("#foo-bar-baz\n  hello");
+		$this->assertEquals("<div id=\"foo-bar-baz\">\n  hello\n</div>", $this->parser->fetch());
+	}
 	
 	/**
 	 * Test tag without name, but with class, should be

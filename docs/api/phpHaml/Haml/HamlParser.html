@@ -1,0 +1,3190 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class HamlParser</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> HamlParser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Haml parser.</p>
+<p class="description"><p>Haml is templating language. It is very simple and clean.  Example Haml code  <pre><ol><code><pre><li> <span class="src-sym">!!! </span><span class="src-num">1.1</span></li>
+<li> %<span class="src-id">html</span></li>
+<li>   %<span class="src-id">head</span></li>
+<li>     %<span class="src-id">title</span>= <span class="src-var">$title </span>? <span class="src-var">$title </span>: <span class="src-str">'none'</span></li>
+<li>     %<a href="http://www.php.net/link">link</a><span class="src-sym">{ </span>:<span class="src-id">rel </span>=&gt; <span class="src-str">'stylesheet'</span><span class="src-sym">, </span>:<span class="src-id">type </span>=&gt; <span class="src-str">'text/css'</span><span class="src-sym">, </span>:<span class="src-id">href </span>=&gt; <span class="src-str">&quot;</span><span class="src-var">$uri</span>/<span class="src-id">tpl</span>/<span class="src-var">$theme</span>.<span class="src-id">css</span><span class="src-str">&quot; </span><span class="src-sym">}</span></li>
+<li>   %<span class="src-id">body</span></li>
+<li>     <span class="src-comm">#header</span></li>
+<li>       %<span class="src-id">h1</span>.<span class="src-id">sitename example</span>.<span class="src-id">com</span></li>
+<li>     <span class="src-comm">#content</span></li>
+<li>       / <span class="src-id">Table with models</span></li>
+<li>       %<span class="src-id">table</span>.<span class="src-id">config</span>.list</li>
+<li>         %<span class="src-id">tr</span></li>
+<li>           %<span class="src-id">th ID</span></li>
+<li>           %<span class="src-id">th Name</span></li>
+<li>           %<span class="src-id">th Value</span></li>
+<li>         - <span class="src-key">foreach </span><span class="src-sym">(</span><span class="src-var">$models </span><span class="src-key">as </span><span class="src-var">$model</span><span class="src-sym">)</span></li>
+<li>           %<span class="src-id">tr</span><span class="src-sym">[</span><span class="src-var">$model</span><span class="src-sym">]</span></li>
+<li>             %<span class="src-id">td</span>= <span class="src-var">$model</span><span class="src-sym">-&gt;</span><span class="src-id">ID</span></li>
+<li>             %<span class="src-id">td</span>= <span class="src-var">$model</span><span class="src-sym">-&gt;</span><span class="src-id">name</span></li>
+<li>             %<span class="src-id">td</span>= <span class="src-var">$model</span><span class="src-sym">-&gt;</span><span class="src-id">value</span></li>
+<li>     <span class="src-comm">#footer</span></li>
+<li>       %<span class="src-id">address</span>.<span class="src-id">author Random Hacker</span></li>
+</pre></code></ol></pre>  Comparing to original Haml language I added:  <ul><li>Support to translations - use '$'
+ <pre><ol><code><pre><li> %<span class="src-id">strong</span>$ <span class="src-id">Log in</span></li>
+</pre></code></ol></pre></li><li>Including support ('!!') and level changing ('?')
+ <pre><ol><code><pre><li> <span class="src-sym">!! </span><span class="src-id">html</span></li>
+<li> <span class="src-sym">!! </span><span class="src-id">page</span>.<a href="http://www.php.net/header">header</a>?<span class="src-num">2</span></li>
+<li> %<span class="src-id">p</span>?<span class="src-num">3</span></li>
+<li>   <span class="src-id">Foo bar</span></li>
+<li> <span class="src-sym">!! </span><span class="src-id">page</span>.<span class="src-id">footer</span>?<span class="src-num">2</span></li>
+</pre></code></ol></pre></li></ul></p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Amadeusz Jasak &lt;<a href="mailto:amadeusz.jasak@gmail.com">amadeusz.jasak@gmail.com</a>&gt;</li>
+				<li><span class="field">license:</span> <a href="http://www.opensource.org/licenses/mit-license.php">MIT (X11) License</a></li>
+				<li><span class="field">link:</span> <a href="http://sourceforge.net/projects/phphaml/">http://sourceforge.net/projects/phphaml/ SourceForge project page</a></li>
+				<li><span class="field">link:</span> <a href="http://phphaml.sourceforge.net/">http://phphaml.sourceforge.net/ Online documentation</a></li>
+				<li><span class="field">link:</span> <a href="http://haml.hamptoncatlin.com/">http://haml.hamptoncatlin.com/ Original Haml parser (for Ruby)</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_includes_haml_HamlParser_class_php.html">/includes/haml/HamlParser.class.php</a> (line <span class="field"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a73">73</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#INDENT" title="details" class="const-name">INDENT</a> = 					<span class="var-type"> 2</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_AUTO_LEFT" title="details" class="const-name">TOKEN_AUTO_LEFT</a> = 					<span class="var-type"> '['</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_AUTO_RIGHT" title="details" class="const-name">TOKEN_AUTO_RIGHT</a> = 					<span class="var-type"> ']'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_BREAK" title="details" class="const-name">TOKEN_BREAK</a> = 					<span class="var-type"> '|'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_CLASS" title="details" class="const-name">TOKEN_CLASS</a> = 					<span class="var-type"> '.'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_COMMENT" title="details" class="const-name">TOKEN_COMMENT</a> = 					<span class="var-type"> '/'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_DOCTYPE" title="details" class="const-name">TOKEN_DOCTYPE</a> = 					<span class="var-type"> '!!!'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_ID" title="details" class="const-name">TOKEN_ID</a> = 					<span class="var-type"> '#'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_INCLUDE" title="details" class="const-name">TOKEN_INCLUDE</a> = 					<span class="var-type"> '!!'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_INDENT" title="details" class="const-name">TOKEN_INDENT</a> = 					<span class="var-type"> ' '</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_INSTRUCTION_PHP" title="details" class="const-name">TOKEN_INSTRUCTION_PHP</a> = 					<span class="var-type"> '-'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_LEVEL" title="details" class="const-name">TOKEN_LEVEL</a> = 					<span class="var-type"> '?'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_LINE" title="details" class="const-name">TOKEN_LINE</a> = 					<span class="var-type"> &quot;\n&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_OPTION" title="details" class="const-name">TOKEN_OPTION</a> = 					<span class="var-type"> ':'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_OPTIONS_LEFT" title="details" class="const-name">TOKEN_OPTIONS_LEFT</a> = 					<span class="var-type"> '{'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_OPTIONS_RIGHT" title="details" class="const-name">TOKEN_OPTIONS_RIGHT</a> = 					<span class="var-type"> '}'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_OPTIONS_SEPARATOR" title="details" class="const-name">TOKEN_OPTIONS_SEPARATOR</a> = 					<span class="var-type"> ','</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_OPTION_VALUE" title="details" class="const-name">TOKEN_OPTION_VALUE</a> = 					<span class="var-type"> '=&gt;'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_PARSE_PHP" title="details" class="const-name">TOKEN_PARSE_PHP</a> = 					<span class="var-type"> '='</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_SINGLE" title="details" class="const-name">TOKEN_SINGLE</a> = 					<span class="var-type"> '/'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_TAG" title="details" class="const-name">TOKEN_TAG</a> = 					<span class="var-type"> '%'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_TEXT_BLOCKS" title="details" class="const-name">TOKEN_TEXT_BLOCKS</a> = 					<span class="var-type"> ':'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_TRANSLATE" title="details" class="const-name">TOKEN_TRANSLATE</a> = 					<span class="var-type"> '$'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aBlocks" title="details" class="var-name">$aBlocks</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aChildren" title="details" class="var-name">$aChildren</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aClosedTags" title="details" class="var-name">$aClosedTags</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aDebug" title="details" class="var-name">$aDebug</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$aDoctypes" title="details" class="var-name">$aDoctypes</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aFilters" title="details" class="var-name">$aFilters</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aInlineTags" title="details" class="var-name">$aInlineTags</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aNoIndentTags" title="details" class="var-name">$aNoIndentTags</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aPhpBlocks" title="details" class="var-name">$aPhpBlocks</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$aVariables" title="details" class="var-name">$aVariables</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$bBlock" title="details" class="var-name">$bBlock</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$bCompile" title="details" class="var-name">$bCompile</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$bDebug" title="details" class="var-name">$bDebug</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$bEmbed" title="details" class="var-name">$bEmbed</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$bInside" title="details" class="var-name">$bInside</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$bRemoveBlank" title="details" class="var-name">$bRemoveBlank</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">integer</span>
+					<a href="#$iIndent" title="details" class="var-name">$iIndent</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>
+					<a href="#$oInstance" title="details" class="var-name">$oInstance</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">object</span>
+					<a href="#$oParent" title="details" class="var-name">$oParent</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">boolean</span>
+					<a href="#$otc" title="details" class="var-name">$otc</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sFile" title="details" class="var-name">$sFile</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sPath" title="details" class="var-name">$sPath</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sRealSource" title="details" class="var-name">$sRealSource</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sSource" title="details" class="var-name">$sSource</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sTag" title="details" class="var-name">$sTag</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sTmp" title="details" class="var-name">$sTmp</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$sTranslate" title="details" class="var-name">$sTranslate</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#append" title="details" class="method-name">append</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$aData</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#arrayExport" title="details" class="method-name">arrayExport</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#assign" title="details" class="method-name">assign</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$sValue</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#canIndent" title="details" class="method-name">canIndent</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#clearCompiled" title="details" class="method-name">clearCompiled</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#clearVariables" title="details" class="method-name">clearVariables</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">integer</span>
+										<a href="#countLevel" title="details" class="method-name">countLevel</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sLine</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#createLine" title="details" class="method-name">createLine</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sLine</span>, <span class="var-type">object Parent</span>&nbsp;<span class="var-name">$parent</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iLine</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#display" title="details" class="method-name">display</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#embedCode" title="details" class="method-name">embedCode</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bEmbed</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#fetch" title="details" class="method-name">fetch</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getAsSource" title="details" class="method-name">getAsSource</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iLevel</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getFilename" title="details" class="method-name">getFilename</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span> = <span class="var-default">false</span>], [<span class="var-type">boolean/string</span>&nbsp;<span class="var-name">$bCompile</span> = <span class="var-default">true</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#getVariables" title="details" class="method-name">getVariables</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#haml" title="details" class="method-name">haml</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sSource</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">HamlParser</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span> = <span class="var-default">false</span>], [<span class="var-type">boolean/string</span>&nbsp;<span class="var-name">$bCompile</span> = <span class="var-default">true</span>], [<span class="var-type">object Parent</span>&nbsp;<span class="var-name">$oParent</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$aDebug</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bInside</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#indent" title="details" class="method-name">indent</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sLine</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$iAdd</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bNew</span> = <span class="var-default">true</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bCount</span> = <span class="var-default">true</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#isClosed" title="details" class="method-name">isClosed</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTag</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#isDebug" title="details" class="method-name">isDebug</a>
+											([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bDebug</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#isFirst" title="details" class="method-name">isFirst</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#isInline" title="details" class="method-name">isInline</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTag</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#isLast" title="details" class="method-name">isLast</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#parseBreak" title="details" class="method-name">parseBreak</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sFile</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#parseFile" title="details" class="method-name">parseFile</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$aSource</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#parseLine" title="details" class="method-name">parseLine</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sSource</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#parseSquareBrackets" title="details" class="method-name">parseSquareBrackets</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mVariable</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#parseTextBlock" title="details" class="method-name">parseTextBlock</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sText</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#registerBlock" title="details" class="method-name">registerBlock</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mCallable</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#registerFilter" title="details" class="method-name">registerFilter</a>
+											(<span class="var-type">callable</span>&nbsp;<span class="var-name">$mCallable</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span> = <span class="var-default">false</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>
+										<a href="#removeBlank" title="details" class="method-name">removeBlank</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bRemoveBlank</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#render" title="details" class="method-name">render</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setFile" title="details" class="method-name">setFile</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setParent" title="details" class="method-name">setParent</a>
+											(<span class="var-type">HamlParser</span>&nbsp;<span class="var-name">$oParent</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setPath" title="details" class="method-name">setPath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setSource" title="details" class="method-name">setSource</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sHaml</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setTmp" title="details" class="method-name">setTmp</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTmp</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#sourceIndent" title="details" class="method-name">sourceIndent</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sSource</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$iLevel</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#translate" title="details" class="method-name">translate</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">boolean</span>
+										<a href="#tryRegisterSass" title="details" class="method-name">tryRegisterSass</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#unregisterBlock" title="details" class="method-name">unregisterBlock</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#unregisterFilter" title="details" class="method-name">unregisterFilter</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#writeAttributes" title="details" class="method-name">writeAttributes</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#__otc" title="details" class="method-name">__otc</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$aBlocks" id="$aBlocks"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aBlocks</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a576">576</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of text processing blocks</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aChildren" id="$aChildren"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aChildren</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a115">115</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Children parsers</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aClosedTags" id="$aClosedTags"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aClosedTags</span>
+			 = <span class="var-default">array('br', 'hr', 'link', 'meta', 'img', 'input')</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1209">1209</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of closed tags (like br, link...)</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aDebug" id="$aDebug"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aDebug</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a224">224</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Debugging informations</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aDoctypes" id="$aDoctypes"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$aDoctypes</span>
+			 = <span class="var-default">array<br />	(<br />		'1.1' =&gt; '&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.1//EN&quot; &quot;http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd&quot;&gt;',<br />		'Strict' =&gt; '&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;',<br />		'Transitional' =&gt; '&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;',<br />		'Frameset' =&gt; '&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Frameset//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd&quot;&gt;',<br />		'XML' =&gt; &quot;&lt;?php echo '&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;utf-8\&quot;?&gt;'; ?&gt;\n&quot;<br />	)</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1183">1183</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Doctype definitions</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aFilters" id="$aFilters"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aFilters</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1342">1342</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of registered filters</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aInlineTags" id="$aInlineTags"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aInlineTags</span>
+			 = <span class="var-default">array<br />	(<br />		'a', 'strong', 'b', 'em', 'i', 'h1', 'h2', 'h3', 'h4',<br />		'h5', 'h6', 'span', 'title', 'li', 'dt', 'dd', 'code',<br />		'cite', 'td', 'th', 'abbr', 'acronym', 'legend', 'label'<br />	)</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1197">1197</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of inline tags</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aNoIndentTags" id="$aNoIndentTags"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aNoIndentTags</span>
+			 = <span class="var-default">array('pre', 'textarea')</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1216">1216</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of tags which can't be indented</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aPhpBlocks" id="$aPhpBlocks"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aPhpBlocks</span>
+			 = <span class="var-default">array('if', 'else', 'elseif', 'while', 'switch', 'for', 'do')</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1224">1224</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of PHP blocks</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$aVariables" id="$aVariables"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$aVariables</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1233">1233</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Template variables</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$bBlock" id="$bBlock"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$bBlock</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a157">157</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Block of PHP code</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$bCompile" id="$bCompile"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$bCompile</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a94">94</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compile templates??</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$bDebug" id="$bDebug"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$bDebug</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a395">395</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Debug mode</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#methodisDebug">HamlParser::isDebug()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$bEmbed" id="$bEmbed"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$bEmbed</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a631">631</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Eval embedded PHP code</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#methodembedCode">HamlParser::embedCode()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$bInside" id="$bInside"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$bInside</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a217">217</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Is used dynamic including</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$bRemoveBlank" id="$bRemoveBlank"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$bRemoveBlank</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a676">676</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove white spaces??</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$iIndent" id="$iIndent"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$iIndent</span>
+			 = <span class="var-default"> -1</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a122">122</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indent level</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$oInstance" id="$oInstance"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>
+			<span class="var-name">$oInstance</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a653">653</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Instance for getInstance</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#methodgetInstance">HamlParser::getInstance()</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$oParent" id="$oParent"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">object</span>
+			<span class="var-name">$oParent</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a108">108</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parent parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$otc" id="$otc"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">boolean</span>
+			<span class="var-name">$otc</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a254">254</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">One time constructor, is executed??</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sFile" id="$sFile"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sFile</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a101">101</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Filename</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sPath" id="$sPath"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sPath</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a87">87</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Files path</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sRealSource" id="$sRealSource"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sRealSource</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a355">355</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Real source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sSource" id="$sSource"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sSource</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a80">80</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Haml source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sTag" id="$sTag"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sTag</span>
+			 = <span class="var-default"> 'div'</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a164">164</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Current tag name</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sTmp" id="$sTmp"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sTmp</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a150">150</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Temporary directory</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sTranslate" id="$sTranslate"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$sTranslate</span>
+			 = <span class="var-default"> 'fake_translate'</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a129">129</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Translation function name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodappend" id="append"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">append</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1272">1272</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Assign associative array of variables</p>
+<p class="description"><p><pre><ol><code><pre><li> <span class="src-comm">// ...</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodappend">append</a><span class="src-sym">(</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'foo' </span>=&gt; <span class="src-str">'bar'</span><span class="src-sym">, </span><span class="src-str">'lorem' </span>=&gt; <span class="src-str">'ipsum'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$data </span>= <span class="src-key">array</span></li>
+<li> <span class="src-sym">(</span></li>
+<li>   <span class="src-str">'x' </span>=&gt; <span class="src-num">10</span><span class="src-sym">,</span></li>
+<li>   <span class="src-str">'y' </span>=&gt; <span class="src-num">5</span></li>
+<li> <span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodappend">append</a><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			append
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$aData</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$aData</span><span class="var-description">: Data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodarrayExport" id="arrayExport"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">arrayExport</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1445">1445</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Export array</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			arrayExport
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodassign" id="assign"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">assign</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1249">1249</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Assign variable</p>
+<p class="description"><p><pre><ol><code><pre><li> <span class="src-comm">// ...</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'foo'</span><span class="src-sym">, </span><span class="src-str">'bar'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$lorem </span>= <span class="src-str">'ipsum'</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'example'</span><span class="src-sym">, </span><span class="src-var">$lorem</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			assign
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$sValue</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Name</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$sValue</span><span class="var-description">: Value</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcanIndent" id="canIndent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">canIndent</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1003">1003</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Can indent (check for parent is NoIndentTag)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			canIndent
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodclearCompiled" id="clearCompiled"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">clearCompiled</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1294">1294</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove all compiled templates (*.hphp files)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			clearCompiled
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodclearVariables" id="clearVariables"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">clearVariables</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1283">1283</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			clearVariables
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodcountLevel" id="countLevel"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">countLevel</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1036">1036</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Count level of line</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			countLevel
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sLine</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sLine</span><span class="var-description">: Line</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcreateLine" id="createLine"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">createLine</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a541">541</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create and append line to parent</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			createLine
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sLine</span>, <span class="var-type">object Parent</span>&nbsp;<span class="var-name">$parent</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$iLine</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sLine</span><span class="var-description">: Line</span>			</li>
+					<li>
+				<span class="var-type">object Parent</span>
+				<span class="var-name">$parent</span><span class="var-description">: parser</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iLine</span><span class="var-description">: Line number</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methoddisplay" id="display"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">display</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1332">1332</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Display template</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#methodfetch">HamlParser::fetch()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			display
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sFilename</span><span class="var-description">: Filename</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodembedCode" id="embedCode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">embedCode</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a639">639</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Eval embedded PHP code</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			embedCode
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bEmbed</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bEmbed</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodfetch" id="fetch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">fetch</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1319">1319</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return compiled template</p>
+<p class="description"><p><pre><ol><code><pre><li> <span class="src-comm">// ...</span></li>
+<li> echo <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetSource">setSource</a><span class="src-sym">(</span><span class="src-str">'%strong Foo'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodfetch">fetch</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// &lt;strong&gt;Foo&lt;/strong&gt;</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetSource">setSource</a><span class="src-sym">(</span><span class="src-str">'%strong Bar'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methoddisplay">display</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// &lt;strong&gt;Bar&lt;/strong&gt;</span></li>
+<li> echo <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetSource">setSource</a><span class="src-sym">(</span><span class="src-str">'%em Linux'</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// &lt;strong&gt;Linux&lt;/strong&gt;</span></li>
+<li>&nbsp;</li>
+<li> echo <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodfetch">fetch</a><span class="src-sym">(</span><span class="src-str">'bar.haml'</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// Compile and display bar.haml</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			fetch
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$sFilename</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sFilename</span><span class="var-description">: Filename</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetAsSource" id="getAsSource"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getAsSource</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a522">522</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return source of child</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAsSource
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$iLevel</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iLevel</span><span class="var-description">: Level</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetFilename" id="getFilename"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getFilename</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a345">345</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return filename to include</p>
+<p class="description"><p>You can override this function.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getFilename
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getInstance</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a663">663</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Implements singleton pattern</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#method__construct">HamlParser::__construct()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span> = <span class="var-default">false</span>], [<span class="var-type">boolean/string</span>&nbsp;<span class="var-name">$bCompile</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sPath</span><span class="var-description">: Path to files</span>			</li>
+					<li>
+				<span class="var-type">boolean/string</span>
+				<span class="var-name">$bCompile</span><span class="var-description">: Compile templates (can be path)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetVariables" id="getVariables"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getVariables</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1388">1388</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return array of template variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getVariables
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodhaml" id="haml"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">haml</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a239">239</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render Haml. Append globals variables</p>
+<p class="description"><p>Simple way to use Haml  <pre><ol><code><pre><li> echo <span class="src-id"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span><span class="src-sym">::</span><a href="../../phpHaml/Haml/HamlParser.html#methodhaml">haml</a><span class="src-sym">(</span><span class="src-str">'%strong Hello, World!'</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// &lt;strong&gt;Hello, World!&lt;/strong&gt;</span></li>
+<li> <span class="src-var">$foo </span>= <span class="src-str">'bar'</span><span class="src-sym">; </span><span class="src-comm">// This is global variable</span></li>
+<li> echo <span class="src-id">Haml</span><span class="src-sym">::</span><span class="src-id">haml</span><span class="src-sym">(</span><span class="src-str">'%strong= &quot;Foo is $foo&quot;'</span><span class="src-sym">)</span><span class="src-sym">; </span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> xHTML</li>
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			haml
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sSource</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sSource</span><span class="var-description">: Haml source</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a190">190</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The constructor.</p>
+<p class="description"><p>Create Haml parser. Second argument can be path to  temporary directory or boolean if true then templates  are compiled to templates path else if false then  templates are compiled on every run  <pre><ol><code><pre><li> &lt;?<span class="src-id">php</span></li>
+<li> <span class="src-inc">require_once </span><span class="src-str">'./includes/haml/HamlParser.class.php'</span><span class="src-sym">;</span></li>
+<li>&nbsp;</li>
+<li> <span class="src-var">$parser </span>= <span class="src-key">new </span><span class="src-id"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span><span class="src-sym">(</span><span class="src-str">'./tpl'</span><span class="src-sym">, </span><span class="src-str">'./tmp'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$foo </span>= <span class="src-str">'bar'</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'foo'</span><span class="src-sym">, </span><span class="src-var">$foo</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methoddisplay">display</a><span class="src-sym">(</span><span class="src-str">'mainpage.haml'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-php">?&gt;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">HamlParser</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span> = <span class="var-default">false</span>], [<span class="var-type">boolean/string</span>&nbsp;<span class="var-name">$bCompile</span> = <span class="var-default">true</span>], [<span class="var-type">object Parent</span>&nbsp;<span class="var-name">$oParent</span> = <span class="var-default">null</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$aDebug</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bInside</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sPath</span><span class="var-description">: Path to files</span>			</li>
+					<li>
+				<span class="var-type">boolean/string</span>
+				<span class="var-name">$bCompile</span><span class="var-description">: Compile templates (can be path)</span>			</li>
+					<li>
+				<span class="var-type">object Parent</span>
+				<span class="var-name">$oParent</span><span class="var-description">: parser</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$aDebug</span><span class="var-description">: Array with debug informations</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bInside</span><span class="var-description">: Is used dynamic including</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodindent" id="indent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">indent</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a953">953</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indent line</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			indent
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sLine</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$iAdd</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bNew</span> = <span class="var-default">true</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bCount</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sLine</span><span class="var-description">: Line</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iAdd</span><span class="var-description">: Additional indention level</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bNew</span><span class="var-description">: Add new line</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bCount</span><span class="var-description">: Count level from parent</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodisClosed" id="isClosed"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">isClosed</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1058">1058</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check for closed tag</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isClosed
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTag</span><span class="var-description">: Tag</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodisDebug" id="isDebug"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">isDebug</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a406">406</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set and check debug mode. If is set  debugging mode to generated source are  added comments with debugging mode and  Haml source is not cached.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isDebug
+		</span>
+					([<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bDebug</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bDebug</span><span class="var-description">: Debugging mode (if null, then only return current state)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodisFirst" id="isFirst"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">isFirst</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a974">974</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Is first child of parent</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isFirst
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodisInline" id="isInline"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">isInline</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1047">1047</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Check for inline tag</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isInline
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTag</span><span class="var-description">: Tag</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodisLast" id="isLast"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">isLast</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a988">988</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Is last child of parent</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isLast
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodparseBreak" id="parseBreak"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">parseBreak</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a510">510</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse multiline</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			parseBreak
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sFile</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sFile</span><span class="var-description">: File content</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodparseFile" id="parseFile"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">parseFile</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a556">556</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse file</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			parseFile
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$aSource</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$aSource</span><span class="var-description">: Array of source lines</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodparseLine" id="parseLine"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">parseLine</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a696">696</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse line</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			parseLine
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sSource</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sSource</span><span class="var-description">: Line</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodparseSquareBrackets" id="parseSquareBrackets"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">parseSquareBrackets</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1399">1399</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse variable in square brackets</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Attributes</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			parseSquareBrackets
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mVariable</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mVariable</span><span class="var-description">: Variable</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodparseTextBlock" id="parseTextBlock"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">parseTextBlock</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a620">620</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse text block</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			parseTextBlock
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$sText</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Block name</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sText</span><span class="var-description">: Data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodregisterBlock" id="registerBlock"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">registerBlock</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a596">596</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Register block</p>
+<p class="description"><p>Text processing blocks are very usefull stuff ;)  <pre><ol><code><pre><li> <span class="src-comm">// ...</span></li>
+<li> %<span class="src-id">code</span>.<span class="src-id">checksum</span></li>
+<li> <span class="src-var">$tpl </span>= &lt;&lt;&lt;__TPL__</li>
+<li>   :<a href="http://www.php.net/md5">md5</a></li>
+<li>     <span class="src-id">Count MD5 checksum of me</span></li>
+<li> <span class="src-id">__TPL__</span>;</li>
+<li> <span class="src-id"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>::<a href="../../phpHaml/Haml/HamlParser.html#methodregisterBlock">registerBlock</a>('<a href="http://www.php.net/md5">md5</a>', '<a href="http://www.php.net/md5">md5</a>');</li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methoddisplay">display</a>(<span class="src-var">$tpl</span>); // &lt;<span class="src-id">code class</span>=&quot;<span class="src-id">checksum</span>&quot;&gt;<span class="src-id">iejmgioemvijeejvijioj323</span></li>
+</pre></code></ol></pre>  &lt;/code&gt;</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			registerBlock
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$mCallable</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$mCallable</span><span class="var-description">: Callable</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodregisterFilter" id="registerFilter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">registerFilter</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1363">1363</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Register output filter.</p>
+<p class="description"><p>Filters are next usefull stuff. For example if  you want remove &lt;em&gt;all&lt;/em&gt; whitespaces (blah) use this  <pre><ol><code><pre><li> <span class="src-comm">// ...</span></li>
+<li> <span class="src-key">function </span><span class="src-id">fcw</span><span class="src-sym">(</span><span class="src-var">$data</span><span class="src-sym">)</span></li>
+<li> <span class="src-sym">{</span></li>
+<li>   <span class="src-key">return </span><a href="http://www.php.net/preg_replace">preg_replace</a><span class="src-sym">(</span><span class="src-str">'|\s*|'</span><span class="src-sym">, </span><span class="src-str">''</span><span class="src-sym">, </span><span class="src-var">$data</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-sym">}</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodregisterFilter">registerFilter</a><span class="src-sym">(</span><span class="src-str">'fcw'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> echo <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodfetch">fetch</a><span class="src-sym">(</span><span class="src-str">'foo.haml'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			registerFilter
+		</span>
+					(<span class="var-type">callable</span>&nbsp;<span class="var-name">$mCallable</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">callable</span>
+				<span class="var-name">$mCallable</span><span class="var-description">: Filter</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodremoveBlank" id="removeBlank"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">removeBlank</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a684">684</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove white spaces</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../phpHaml/Haml/HamlParser.html">HamlParser</a></span>
+		<span class="method-name">
+			removeBlank
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$bRemoveBlank</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$bRemoveBlank</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodrender" id="render"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">render</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a421">421</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render the source or file</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#methodfetch">HamlParser::fetch()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			render
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodsetFile" id="setFile"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setFile</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a327">327</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set filename.</p>
+<p class="description"><p>Filename can be full path to file or  filename (then file is searched in path)  <pre><ol><code><pre><li> <span class="src-comm">// We have file ./foo.haml and ./tpl/bar.haml</span></li>
+<li><span class="src-comm">// ...</span></li>
+<li> </li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetPath">setPath</a><span class="src-sym">(</span><span class="src-str">'./tpl'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetFile">setFile</a><span class="src-sym">(</span><span class="src-str">'foo.haml'</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// Setted to ./foo.haml</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetFile">setFile</a><span class="src-sym">(</span><span class="src-str">'bar.haml'</span><span class="src-sym">)</span><span class="src-sym">; </span><span class="src-comm">// Setted to ./tpl/bar.haml</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setFile
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sPath</span><span class="var-description">: Filename</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetParent" id="setParent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setParent</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a292">292</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set parent parser. Used internally.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setParent
+		</span>
+					(<span class="var-type">HamlParser</span>&nbsp;<span class="var-name">$oParent</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object Parent</span>
+				<span class="var-name">$oParent</span><span class="var-description">: parser</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetPath" id="setPath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setPath</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a305">305</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set files path.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setPath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sPath</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sPath</span><span class="var-description">: File path</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetSource" id="setSource"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setSource</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a369">369</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set source code</p>
+<p class="description"><p><pre><ol><code><pre><li> <span class="src-comm">// ...</span></li>
+<li> <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetFile">setFile</a><span class="src-sym">(</span><span class="src-str">'foo.haml'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li> echo <span class="src-var">$parser</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodsetSource">setSource</a><span class="src-sym">(</span><span class="src-str">'%strong Foo'</span><span class="src-sym">)</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodfetch">fetch</a><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">; </span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setSource
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sHaml</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sHaml</span><span class="var-description">: Source</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetTmp" id="setTmp"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setTmp</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a383">383</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set temporary directory</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setTmp
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sTmp</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sTmp</span><span class="var-description">: Directory</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsourceIndent" id="sourceIndent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">sourceIndent</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1021">1021</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indent Haml source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			sourceIndent
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sSource</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$iLevel</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sSource</span><span class="var-description">: Source</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$iLevel</span><span class="var-description">: Level</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodtranslate" id="translate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">translate</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a139">139</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Translation function</p>
+<p class="description"><p>You can use it in templates.  <pre><ol><code><pre><li> %<span class="src-id">strong</span>= <span class="src-var">$foo</span>.<span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../../phpHaml/Haml/HamlParser.html#methodtranslate">translate</a><span class="src-sym">(</span><span class="src-str">'to translate'</span><span class="src-sym">)</span></li>
+</pre></code></ol></pre></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			translate
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodtryRegisterSass" id="tryRegisterSass"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">tryRegisterSass</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a276">276</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Try register Sass engine as text block</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			tryRegisterSass
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodunregisterBlock" id="unregisterBlock"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">unregisterBlock</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a608">608</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Unregister block</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			unregisterBlock
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodunregisterFilter" id="unregisterFilter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">unregisterFilter</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1377">1377</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Unregister output filter</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			unregisterFilter
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$sName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$sName</span><span class="var-description">: Name</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodwriteAttributes" id="writeAttributes"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">writeAttributes</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1429">1429</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Write attributes</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			writeAttributes
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="method__otc" id="__otc"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">__otc</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a261">261</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">One time constructor. Register Textile block</p>
+<p class="description"><p>if exists Textile class and Markdown block if  exists Markdown functions</p></p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__otc
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">__toString</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a499">499</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render the source or file</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Haml/HamlParser.html#methodfetch">HamlParser::fetch()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constINDENT" id="INDENT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">INDENT</span>
+			 = <span class="const-default"> 2</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1176">1176</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Number of TOKEN_INDENT to indent</p>
+	
+	
+</div>
+<a name="constTOKEN_AUTO_LEFT" id="TOKEN_AUTO_LEFT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_AUTO_LEFT</span>
+			 = <span class="const-default"> '['</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1161">1161</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Begin automatic id and classes naming (%tr[$model])</p>
+	
+	
+</div>
+<a name="constTOKEN_AUTO_RIGHT" id="TOKEN_AUTO_RIGHT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_AUTO_RIGHT</span>
+			 = <span class="const-default"> ']'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1166">1166</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">End automatic id and classes naming</p>
+	
+	
+</div>
+<a name="constTOKEN_BREAK" id="TOKEN_BREAK"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_BREAK</span>
+			 = <span class="const-default"> '|'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1156">1156</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Break line</p>
+	
+	
+</div>
+<a name="constTOKEN_CLASS" id="TOKEN_CLASS"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_CLASS</span>
+			 = <span class="const-default"> '.'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1086">1086</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set element class (.foo, %strong.lorem.ipsum)</p>
+	
+	
+</div>
+<a name="constTOKEN_COMMENT" id="TOKEN_COMMENT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_COMMENT</span>
+			 = <span class="const-default"> '/'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1136">1136</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Comment code (block and inline)</p>
+	
+	
+</div>
+<a name="constTOKEN_DOCTYPE" id="TOKEN_DOCTYPE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_DOCTYPE</span>
+			 = <span class="const-default"> '!!!'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1126">1126</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set DOCTYPE or XML header (!!! 1.1, !!!, !!! XML)</p>
+	
+	
+</div>
+<a name="constTOKEN_ID" id="TOKEN_ID"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_ID</span>
+			 = <span class="const-default"> '#'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1081">1081</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set element ID (#foo, %strong#bar)</p>
+	
+	
+</div>
+<a name="constTOKEN_INCLUDE" id="TOKEN_INCLUDE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_INCLUDE</span>
+			 = <span class="const-default"> '!!'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1131">1131</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Include file (!! tpl2)</p>
+	
+	
+</div>
+<a name="constTOKEN_INDENT" id="TOKEN_INDENT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_INDENT</span>
+			 = <span class="const-default"> ' '</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1071">1071</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Indention token</p>
+	
+	
+</div>
+<a name="constTOKEN_INSTRUCTION_PHP" id="TOKEN_INSTRUCTION_PHP"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_INSTRUCTION_PHP</span>
+			 = <span class="const-default"> '-'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1116">1116</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Begin PHP instruction (without displaying)</p>
+	
+	
+</div>
+<a name="constTOKEN_LEVEL" id="TOKEN_LEVEL"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_LEVEL</span>
+			 = <span class="const-default"> '?'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1146">1146</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Mark level (%strong?3, !! foo?3)</p>
+	
+	
+</div>
+<a name="constTOKEN_LINE" id="TOKEN_LINE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_LINE</span>
+			 = <span class="const-default"> &quot;\n&quot;</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1066">1066</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">End of line character</p>
+	
+	
+</div>
+<a name="constTOKEN_OPTION" id="TOKEN_OPTION"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_OPTION</span>
+			 = <span class="const-default"> ':'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1106">1106</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Start option name</p>
+	
+	
+</div>
+<a name="constTOKEN_OPTIONS_LEFT" id="TOKEN_OPTIONS_LEFT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_OPTIONS_LEFT</span>
+			 = <span class="const-default"> '{'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1091">1091</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Start the options (attributes) list</p>
+	
+	
+</div>
+<a name="constTOKEN_OPTIONS_RIGHT" id="TOKEN_OPTIONS_RIGHT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_OPTIONS_RIGHT</span>
+			 = <span class="const-default"> '}'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1096">1096</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">End the options list</p>
+	
+	
+</div>
+<a name="constTOKEN_OPTIONS_SEPARATOR" id="TOKEN_OPTIONS_SEPARATOR"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_OPTIONS_SEPARATOR</span>
+			 = <span class="const-default"> ','</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1101">1101</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Options separator</p>
+	
+	
+</div>
+<a name="constTOKEN_OPTION_VALUE" id="TOKEN_OPTION_VALUE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_OPTION_VALUE</span>
+			 = <span class="const-default"> '=&gt;'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1111">1111</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Start option value</p>
+	
+	
+</div>
+<a name="constTOKEN_PARSE_PHP" id="TOKEN_PARSE_PHP"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_PARSE_PHP</span>
+			 = <span class="const-default"> '='</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1121">1121</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse PHP (and display)</p>
+	
+	
+</div>
+<a name="constTOKEN_SINGLE" id="TOKEN_SINGLE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_SINGLE</span>
+			 = <span class="const-default"> '/'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1151">1151</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create single, closed tag (%meta{ :foo =&gt; 'bar'}/)</p>
+	
+	
+</div>
+<a name="constTOKEN_TAG" id="TOKEN_TAG"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_TAG</span>
+			 = <span class="const-default"> '%'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1076">1076</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create tag (%strong, %div)</p>
+	
+	
+</div>
+<a name="constTOKEN_TEXT_BLOCKS" id="TOKEN_TEXT_BLOCKS"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_TEXT_BLOCKS</span>
+			 = <span class="const-default"> ':'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1171">1171</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Insert text block (:textile)</p>
+	
+	
+</div>
+<a name="constTOKEN_TRANSLATE" id="TOKEN_TRANSLATE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_TRANSLATE</span>
+			 = <span class="const-default"> '$'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Haml_includeshamlHamlParser.class.php.html#a1141">1141</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Translate content (%strong$ Translate)</p>
+	
+	
+</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Mon, 09 Jul 2007 10:05:05 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

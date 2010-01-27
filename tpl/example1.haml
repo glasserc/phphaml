@@ -1,0 +1,21 @@
+!!! 1.1
+%html
+  %head
+    %title Example #1
+    %meta{ :http-equiv => 'Content-Type', :content => 'application/xhtml+xml; charset=utf-8' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => 'tpl/main.css' }
+  %body
+    %table
+      /[if IE]
+        %p Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. Foo bar. 
+      / Lorem ipsum
+      / Without header - this comments commenting feature
+        %tr
+          %th ID
+          %th Name
+          %th Value
+      - foreach ($models as $model)
+        %tr[$model]
+          %td= $model->ID
+          %td= $model->name
+          %td= $model->value

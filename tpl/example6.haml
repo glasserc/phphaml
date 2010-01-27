@@ -1,0 +1,51 @@
+!!! XML
+!!! 1.1
+%html{ :xmlns => 'http://www.w3.org/1999/xhtml' }
+  %head
+    %title$ Log in
+    %style{ :type => 'text/css' }
+      :sass
+        !base_size = 16px
+        body
+          :background-color green
+          :font
+            :family sans-serif
+            :size= !base_size
+          :margin 0
+          :padding 0
+        #header
+          :background-color yellow
+          h1
+            :font
+              :size 2.5em
+              :family serif
+          h1:hover
+            :color green
+        #content
+          :background-color blue
+          form
+            fieldset
+              :border none
+              :padding 0
+              legend
+                :font
+                  :weight bold
+                  :size 1.4em
+              label
+                :display block
+  %body
+    #header
+      %h1$ Log in
+      /[if IE]
+        %p$ Why are you using Internet Explorer?
+    #content
+      %form{ :action => $_SERVER['REQUEST_URI'], :method => 'post' }
+        %fieldset
+          %legend$ Authorization
+          %label{ :for => 'usernameField' }$ Username
+          %input#usernameField{ :name => 'username', :type => 'text' }
+          %label{ :for => 'passwordField' }$ Password
+          %input#passwordField{ :name => 'password', :type => 'password' }
+          %input{ :name => 'submit', :type => 'submit', :value => $this->translate('Log in') }
+    #footer
+      %address.author Random Hacker

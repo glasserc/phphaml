@@ -1,0 +1,37 @@
+body
+{
+	background: white;
+	color: black;
+	font-size: 12pt;
+}
+
+#container, #content
+{
+   width: auto;
+   padding: 0;
+   border: 0;
+   float: none !important;
+   color: black;
+   background: transparent none;
+}
+
+div#content
+{
+	margin-left: 10%;
+	padding-top: 1em;
+	border-top: 1px solid #930;
+}
+
+a:link, a:visited
+{
+	color: #520;
+	background: transparent;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#content a:link:after, #content a:visited:after
+{
+   content: " <" attr(href) "> ";
+   font-size: 90%;
+}

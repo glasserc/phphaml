@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+		<title>Haml parser reference</title>
+		<link type="text/css" href="styles/main.css" rel="stylesheet" media="screen" />
+		<link type="text/css" href="styles/print.css" rel="stylesheet" media="print" />
+	</head>
+	<body>
+		<div id="container">
+			<h1 id="p1">Haml parser reference</h1>
+			<div id="content">
+				<h2 id="p1_1">User guide</h2>
+				<h3 id="p1_1_1">What is Haml?</h3>
+				<p>This is the best Haml definition: </p>
+				<blockquote class="original">
+					<p>Haml takes your gross, ugly templates and replaces them with veritable <strong>Haiku</strong>.</p>
+					<p>Haml is the next step in generating views in your Rails (also in PHP) application. Haml is a refreshing take that is meant to free us from the shitty templating languages we have gotten used to.</p>
+					<p>Haml is based on one primary principal. Markup should be beautiful.</p>
+				</blockquote>
+				<p>
+					I'm not Haml author, I only implemented Haml in PHP. 
+					Why? I tested a lot of templating system like Smarty, 
+					PHP TAL, clean PHP, but all has one problem - too many 
+					unreadable code.
+				</p>
+				<h3 id="p1_1_2">Comparision</h3>
+				<p>
+					Read this examples. Which is simplier, cleaner, shorten and 
+					more beautiful?? Haml! 
+				</p>
+				<h4 id="p1_1_2_1">PHP example</h4>
+<pre class="example">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" /&gt;
+    &lt;?php if ($title) { ?&gt;
+      &lt;title&gt;&lt;?php echo $title; ?&gt;&lt;/title&gt;
+    &lt;?php } else { ?&gt;
+      &lt;title&gt;&lt;?php echo $pagename; ?&gt;&lt;/title&gt;
+    &lt;?php } ?&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="header"&gt;
+      &lt;h1&gt;&lt;?php echo $pagename; ?&gt;&lt;/h1&gt;
+      &lt;?php if ($slogan) { ?&gt;
+        &lt;span&gt;&lt;?php echo $slogan; ?&gt;&lt;/span&gt;
+      &lt;?php } ?&gt;
+    &lt;/div&gt;
+    &lt;div id="content"&gt;
+      &lt;table class="config list"&gt;
+        &lt;tr&gt;&lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;
+        &lt;?php foreach ($config as $c) { ?&gt;
+          &lt;tr class="&lt;?php echo ($class = forClassName($c)); ?&gt;"
+                 id="&lt;?php echo "$class_{$c-&gt;ID}"; ?&gt;"&gt;
+            &lt;td&gt;&lt;?php echo $c-&gt;ID; ?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?php echo $c-&gt;name; ?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?php echo $c-&gt;value; ?&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;?php } ?&gt;
+      &lt;/table&gt;
+    &lt;/div&gt;
+    &lt;div id="footer"&gt;
+      &lt;span class="author"&gt;Random Hacker&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+				<h4 id="p1_1_2_2">phpHaml example</h4>
+<pre class="example">!!! 1.1
+%html
+  %head
+    %meta{ :http-equiv =&gt; 'Content-Type', :content =&gt; 'application/xhtml+xml;charset=utf-8' }
+    - if ($title)
+      %title= $title
+    - else
+      %title= $pagename
+  %body
+    #header
+      %h1 Example page
+      - if ($slogan)
+        %span= $slogan
+    #content
+      %table.config.list
+        %tr
+          %th ID
+          %th Name
+          %th Value
+        - foreach ($config as $c)
+          %tr[$c]
+            %td= $c-&gt;ID
+            %td= $c-&gt;name
+            %td= $c-&gt;value
+    #footer
+      %span.author Random Hacker
+</pre>
+				<h3 id="p1_1_3">License</h3>
+				<p>
+					phpHaml is distributed under MIT License (X11 License).
+				</p>
+				<blockquote>
+					<p>Copyright &copy; 2007 Amadeusz Jasak and Haml team.</p>
+					<p>
+						Permission is hereby granted, free of charge, to any person obtaining a copy
+						of this software and associated documentation files (the "Software"), to deal
+						in the Software without restriction, including without limitation the rights
+						to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+						copies of the Software, and to permit persons to whom the Software is
+						furnished to do so, subject to the following conditions:
+					</p>
+					<p>
+						The above copyright notice and this permission notice shall be included in
+						all copies or substantial portions of the Software.
+					</p>
+					<p>
+						THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+						IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+						FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+						AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+						LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+						OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+						THE SOFTWARE.
+					</p>
+				</blockquote>
+				
+				<h3 id="p1_1_4">How obtain phpHaml?</h3>
+				<h4 id="p1_1_4_1">Stable release</h4>
+				<p>
+					You can download latest stable release of phpHaml from
+					<a href="http://sourceforge.net/project/showfiles.php?group_id=195590">
+					project download page</a>.
+				</p>
+				<h4 id="p1_1_4_2">Developer release</h4>
+				<p>
+					Of course if you want to obtain developer release (unstable) 
+					you can use <a href="https://phphaml.svn.sourceforge.net/svnroot/phphaml/trunk/">
+					Subversion repository</a>.
+				</p>
+				
+				<h3 id="p1_1_5">Haml language reference</h3>
+				<p>
+					I'm not providing full Haml language reference.
+					Please use <a href="http://haml.hamptoncatlin.com/docs/haml">
+					language reference</a> on Haml author's page.
+				</p>
+				
+				<h2 id="p1_2">HamlParser class reference</h2>
+				
+				<div class="method">
+					<h3 id="p1_2_1"><code class="method_prototype">object __construct([string path, [mixed compile]])</code></h3>
+					<p>The constructor. Create the instance of HamlParser.</p>
+					<h4 id="p1_2_1_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>path</code></dd>
+						<dt>
+							Path to directory with templates. Path must exists and can't 
+							ends with slash (/).
+						</dt>
+						<dd><code>compile</code></dd>
+						<dt>
+							If <code>compile == false</code> then path for compiled 
+							templates is same as source path and templates are compiled 
+							on every request. If <code>compile</code> is string then 
+							<code>compile</code> = path to compiled templates and templates 
+							are compiled only if source changed.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_2"><code class="method_prototype">string __toString()</code></h3>
+					<p>Render current template and return it.</p>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_3"><code class="method_prototype">object append(array data)</code></h3>
+					<p>Sets the template variables from associative array and return object instance.</p>
+					<h4 id="p1_2_3_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>data</code></dd>
+						<dt>
+							Associative array where keys are variables names and values 
+							are variables values.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_4"><code class="method_prototype">object assign(string name, mixed value)</code></h3>
+					<p>Sets the template variable and return object instance.</p>
+					<h4 id="p1_2_4_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>name</code></dd>
+						<dt>
+							Name of variable.
+						</dt>
+						<dd><code>value</code></dd>
+						<dt>
+							Value of variable.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_5"><code class="method_prototype">object clearCompiled()</code></h3>
+					<p>
+						Removes all compiled templates (*.hphp) from temporary 
+						directory and return object instance.
+					</p>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_6"><code class="method_prototype">object clearVariables()</code></h3>
+					<p>
+						Clear templates variables and return object instance. 
+					</p>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_7"><code class="method_prototype">void display([string filename])</code></h3>
+					<p>
+						Display current template or template from <code>filename</code>.
+					</p>
+					<h4 id="p1_2_7_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>filename</code></dd>
+						<dt>
+							Optional filename or full file path to template.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_8"><code class="method_prototype">string fetch([string filename])</code></h3>
+					<p>
+						Fetch (return compiled) current template or template from <code>filename</code>.
+					</p>
+					<h4 id="p1_2_8_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>filename</code></dd>
+						<dt>
+							Optional filename or full file path to template.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_9"><code class="method_prototype">string getFilename(string name)</code></h3>
+					<p>
+						Return filename used for including. You can override this method.
+					</p>
+					<h4 id="p1_2_9_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>name</code></dd>
+						<dt>
+							Name to file (view) to include.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_10"><code class="method_prototype">array getVariables()</code></h3>
+					<p>
+						Return associative array of variables assigned to template.
+					</p>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_11"><code class="method_prototype">string render()</code></h3>
+					<p>
+						Similar functionality as <a href="#p1_2_8"><code>fetch()</code></a>.
+					</p>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_12"><code class="method_prototype">object setFile(string filename)</code></h3>
+					<p>
+						Sets template filename and return object instance.
+					</p>
+					<h4 id="p1_2_12_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>filename</code></dd>
+						<dt>
+							Real path or file in templates directory.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_13"><code class="method_prototype">object setPath(string path)</code></h3>
+					<p>
+						Sets path to templates and return object instance.
+					</p>
+					<h4 id="p1_2_13_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>path</code></dd>
+						<dt>
+							Path to templates without ending slash (/).
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_14"><code class="method_prototype">object setSource(string source)</code></h3>
+					<p>
+						Sets Haml source and return object instance.
+					</p>
+					<h4 id="p1_2_14_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>source</code></dd>
+						<dt>
+							Haml source (can be multiline or one line).
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="p1_2_15"><code class="method_prototype">object setTmp(string path)</code></h3>
+					<p>
+						Sets path to compiled templates and return object instance.
+					</p>
+					<h4 id="p1_2_15_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>path</code></dd>
+						<dt>
+							Path to compiled templates.
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="1_2_16"><code class="method_prototype">object registerBlock(callable block, string name)</code></h3>
+					<p>
+						Register text processing block
+					</p>
+					<h4 id="p1_2_16_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>block</code></dd>
+						<dt>
+							The processing function. Argument of it is text block 
+							data, callable must return processed data.
+						</dt>
+						<dd><code>name</code></dd>
+						<dt>
+							Name of processing block used in templates
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="1_2_17"><code class="method_prototype">object unregisterBlock(string name)</code></h3>
+					<p>
+						Unregister (delete) text processing block
+					</p>
+					<h4 id="p1_2_17_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>name</code></dd>
+						<dt>
+							Name of processing block to unregister
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="1_2_18"><code class="method_prototype">object registerFilter(callable filter, string name)</code></h3>
+					<p>
+						Register output filter
+					</p>
+					<h4 id="p1_2_16_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>filter</code></dd>
+						<dt>
+							The processing function. Argument of it is compiled template,  
+							callable must return processed compiled template.
+						</dt>
+						<dd><code>name</code></dd>
+						<dt>
+							Name of output filter
+						</dt>
+					</dl>
+				</div>
+				
+				<div class="method">
+					<h3 id="1_2_19"><code class="method_prototype">object unregisterFilter(string name)</code></h3>
+					<p>
+						Unregister (delete) output filter
+					</p>
+					<h4 id="p1_2_19_1">Arguments</h4>
+					<dl class="method_arguments">
+						<dd><code>name</code></dd>
+						<dt>
+							Name of output filter to unregister
+						</dt>
+					</dl>
+				</div>
+				
+				<h2 id="p1_3">Conclusion</h2>
+				<p>
+					Thanks for reading this reference. If you want contact  
+					please write to 
+					<a href="mailto:amadeusz.jasak@gmail.com">Amadeusz Jasak</a>. If
+					you can please
+					<a href="http://sourceforge.net/donate/index.php?group_id=195590">
+					donate project</a>.
+				</p>
+				<p>
+					Thanks <a href="http://sourceforge.net">
+					<img src="http://sflogo.sourceforge.net/sflogo.php?group_id=195590&amp;type=1"
+					width="88" height="31" alt="SourceForge.net Logo" style="border: 0;" /></a> for 
+					project hosting.
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

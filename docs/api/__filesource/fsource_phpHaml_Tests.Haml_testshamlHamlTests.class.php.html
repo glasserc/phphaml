@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>File Source for HamlTests.class.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<h1>Source for file HamlTests.class.php</h1>
+<p>Documentation is available at <a href="../phpHaml/Tests.Haml/_tests_haml_HamlTests_class_php.html">HamlTests.class.php</a></p>
+<div class="src-code">
+<pre><ol><li><a name="a1"></a><span class="src-php">&lt;?php</span></li>
+<li><a name="a2"></a><span class="src-doc">/**</span></li>
+<li><a name="a3"></a><span class="src-doc"> * Common Haml tests</span></li>
+<li><a name="a4"></a><span class="src-doc"> * </span></li>
+<li><a name="a5"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc"> Amadeusz Jasak &lt;amadeusz.jasak@gmail.com&gt;</span></li>
+<li><a name="a6"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc"> phpHaml</span></li>
+<li><a name="a7"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@subpackage</span><span class="src-doc"> Tests.Haml</span></li>
+<li><a name="a8"></a><span class="src-doc"> */</span></li>
+<li><a name="a9"></a>&nbsp;</li>
+<li><a name="a10"></a><span class="src-doc">/**</span></li>
+<li><a name="a11"></a><span class="src-doc"> * Common Haml tests</span></li>
+<li><a name="a12"></a><span class="src-doc"> * </span></li>
+<li><a name="a13"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@author</span><span class="src-doc"> Amadeusz Jasak &lt;amadeusz.jasak@gmail.com&gt;</span></li>
+<li><a name="a14"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@package</span><span class="src-doc"> phpHaml</span></li>
+<li><a name="a15"></a><span class="src-doc"> * </span><span class="src-doc-coretag">@subpackage</span><span class="src-doc"> Tests.Haml</span></li>
+<li><a name="a16"></a><span class="src-doc"> */</span></li>
+<li><a name="a17"></a><span class="src-key">final </span><span class="src-key">class </span><a href="../phpHaml/Tests.Haml/HamlTests.html">HamlTests</a> <span class="src-key">extends </span><span class="src-id">PHPUnit_Framework_TestCase</span></li>
+<li><a name="a18"></a><span class="src-sym">{</span></li>
+<li><a name="a19"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a20"></a><span class="src-doc">     * Haml parser</span></li>
+<li><a name="a21"></a><span class="src-doc">     *</span></li>
+<li><a name="a22"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@var </span><span class="src-doc-type">HamlParser </span></li>
+<li><a name="a23"></a><span class="src-doc">     */</span></li>
+<li><a name="a24"></a>    <span class="src-key">private </span><a href="../phpHaml/Tests.Haml/HamlTests.html#var$parser">$parser</a><span class="src-sym">;</span></li>
+<li><a name="a25"></a>    </li>
+<li><a name="a26"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a27"></a><span class="src-doc">     * Create HamlParser</span></li>
+<li><a name="a28"></a><span class="src-doc">     */</span></li>
+<li><a name="a29"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../phpHaml/Tests.Haml/HamlTests.html#methodsetUp">setUp</a><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li><a name="a30"></a>    <span class="src-sym">{</span></li>
+<li><a name="a31"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../phpHaml/Tests.Haml/HamlTests.html#var$parser">parser</a> = <span class="src-key">new </span><span class="src-id"><a href="../phpHaml/Haml/HamlParser.html">HamlParser</a></span><span class="src-sym">(</span><a href="http://www.php.net/dirname">dirname</a><span class="src-sym">(</span>__FILE__<span class="src-sym">)</span>.<span class="src-str">'/templates/original'</span><span class="src-sym">, </span><span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a32"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../phpHaml/Tests.Haml/HamlTests.html#var$parser">parser</a><span class="src-sym">-&gt;</span><a href="../phpHaml/Haml/HamlParser.html#methodsetTmp">setTmp</a><span class="src-sym">(</span><a href="http://www.php.net/dirname">dirname</a><span class="src-sym">(</span>__FILE__<span class="src-sym">)</span>.<span class="src-str">'/../../tmp/haml'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a33"></a>    <span class="src-sym">}</span></li>
+<li><a name="a34"></a>&nbsp;</li>
+<li><a name="a35"></a>    <span class="src-doc">/**</span></li>
+<li><a name="a36"></a><span class="src-doc">     * Buggy! Results are appended. Like in stack. Propably</span></li>
+<li><a name="a37"></a><span class="src-doc">     * it is next problem with output buffering in render().</span></li>
+<li><a name="a38"></a><span class="src-doc">     *</span></li>
+<li><a name="a39"></a><span class="src-doc">     * </span><span class="src-doc-coretag">@see</span><span class="src-doc"> HamlParser::render()</span></li>
+<li><a name="a40"></a><span class="src-doc">     */</span></li>
+<li><a name="a41"></a>    <span class="src-key">public </span><span class="src-key">function </span><a href="../phpHaml/Tests.Haml/HamlTests.html#methodtestTemplateUsedManyTimes">testTemplateUsedManyTimes</a><span class="src-sym">(</span><span class="src-sym">)</span></li>
+<li><a name="a42"></a>    <span class="src-sym">{</span></li>
+<li><a name="a43"></a>        <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../phpHaml/Tests.Haml/HamlTests.html#var$parser">parser</a><span class="src-sym">-&gt;</span><a href="../phpHaml/Haml/HamlParser.html#methodsetSource">setSource</a><span class="src-sym">(</span><span class="src-str">'%li= $i'</span><span class="src-sym">)</span><span class="src-sym">;</span></li>
+<li><a name="a44"></a>        <span class="src-key">for </span><span class="src-sym">(</span><span class="src-var">$i </span>= <span class="src-num">1</span><span class="src-sym">; </span><span class="src-var">$i </span>&lt;= <span class="src-num">10</span><span class="src-sym">; </span><span class="src-var">$i</span>++<span class="src-sym">)</span></li>
+<li><a name="a45"></a>            <span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">assertEquals</span><span class="src-sym">(</span><span class="src-str">&quot;</span><span class="src-str">&lt;<span class="src-id">li</span>&gt;<span class="src-var">$i</span>&lt;/<span class="src-id">li</span>&gt;</span><span class="src-str">&quot;</span><span class="src-sym">,</span></li>
+<li><a name="a46"></a>                <span class="src-var">$this</span><span class="src-sym">-&gt;</span><a href="../phpHaml/Tests.Haml/HamlTests.html#var$parser">parser</a><span class="src-sym">-&gt;</span><a href="../phpHaml/Haml/HamlParser.html#methodassign">assign</a><span class="src-sym">(</span><span class="src-str">'i'</span><span class="src-sym">, </span><span class="src-var">$i</span><span class="src-sym">)</span></li>
+<li><a name="a47"></a>                     <span class="src-sym">-&gt;</span><span class="src-id">fetch</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></li>
+<li><a name="a48"></a>    <span class="src-sym">}</span></li>
+<li><a name="a49"></a><span class="src-sym">}</span></li>
+<li><a name="a50"></a>&nbsp;</li>
+<li><a name="a51"></a><span class="src-php">?&gt;</span></li>
+</ol></pre>
+</div>
+	<p class="notes" id="credit">
+		Documentation generated on Mon, 09 Jul 2007 10:05:06 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</body>
+</html>

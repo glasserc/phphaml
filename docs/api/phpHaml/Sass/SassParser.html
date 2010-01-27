@@ -1,0 +1,1760 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class SassParser</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> SassParser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+											<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+						
+			</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sass parser.</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Amadeusz Jasak &lt;<a href="mailto:amadeusz.jasak@gmail.com">amadeusz.jasak@gmail.com</a>&gt;</li>
+				<li><span class="field">license:</span> <a href="http://www.opensource.org/licenses/mit-license.php">MIT (X11) License</a></li>
+				<li><span class="field">link:</span> <a href="http://sourceforge.net/projects/phphaml/">http://sourceforge.net/projects/phphaml/ SourceForge project page</a></li>
+				<li><span class="field">link:</span> <a href="http://phphaml.sourceforge.net/">http://phphaml.sourceforge.net/ Online documentation</a></li>
+				<li><span class="field">link:</span> <a href="http://haml.hamptoncatlin.com/">http://haml.hamptoncatlin.com/ Original Sass parser (for Ruby)</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_includes_sass_SassParser_class_php.html">/includes/sass/SassParser.class.php</a> (line <span class="field"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a32">32</a></span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+	<a name="sec-const-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constant Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Constants</span> (<a href="#sec-consts">details</a>)
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="const-summary">
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#HEX" title="details" class="const-name">HEX</a> = 					<span class="var-type"> '0123456789ABCDEF'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#INDENT" title="details" class="const-name">INDENT</a> = 					<span class="var-type"> 2</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_ADDITION" title="details" class="const-name">TOKEN_ADDITION</a> = 					<span class="var-type"> '+'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_ATTRIBUTE" title="details" class="const-name">TOKEN_ATTRIBUTE</a> = 					<span class="var-type"> ':'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_ATTRIBUTE_CALCULATE" title="details" class="const-name">TOKEN_ATTRIBUTE_CALCULATE</a> = 					<span class="var-type"> '='</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_ATTRIBUTE_NAMESPACE" title="details" class="const-name">TOKEN_ATTRIBUTE_NAMESPACE</a> = 					<span class="var-type"> ':'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_COMMENT" title="details" class="const-name">TOKEN_COMMENT</a> = 					<span class="var-type"> '/'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_CONSTANT" title="details" class="const-name">TOKEN_CONSTANT</a> = 					<span class="var-type"> '!'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_CONSTANT_VALUE" title="details" class="const-name">TOKEN_CONSTANT_VALUE</a> = 					<span class="var-type"> '='</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_DIVISION" title="details" class="const-name">TOKEN_DIVISION</a> = 					<span class="var-type"> '/'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_INDENT" title="details" class="const-name">TOKEN_INDENT</a> = 					<span class="var-type"> ' '</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_LEFT_BRACKET" title="details" class="const-name">TOKEN_LEFT_BRACKET</a> = 					<span class="var-type"> '('</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_LINE" title="details" class="const-name">TOKEN_LINE</a> = 					<span class="var-type"> &quot;\n&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_MULTIPLICATION" title="details" class="const-name">TOKEN_MULTIPLICATION</a> = 					<span class="var-type"> '*'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_RIGHT_BRACKET" title="details" class="const-name">TOKEN_RIGHT_BRACKET</a> = 					<span class="var-type"> ')'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_STRING" title="details" class="const-name">TOKEN_STRING</a> = 					<span class="var-type"> '&quot;'</span>
+
+				</div>
+								<div class="const-title">
+					<img src="../../media/images/Constant.png" alt=" " />
+					<a href="#TOKEN_SUBTRACTION" title="details" class="const-name">TOKEN_SUBTRACTION</a> = 					<span class="var-type"> '-'</span>
+
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$colors" title="details" class="var-name">$colors</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">array</span>
+					<a href="#$constants" title="details" class="var-name">$constants</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type"><a href="../../phpHaml/Sass/SassElementsList.html">SassElementsList</a></span>
+					<a href="#$elements" title="details" class="var-name">$elements</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$file" title="details" class="var-name">$file</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type"><a href="../../phpHaml/Sass/SassParser.html">SassParser</a></span>
+					<a href="#$instance" title="details" class="var-name">$instance</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$path" title="details" class="var-name">$path</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$renderer" title="details" class="var-name">$renderer</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$source" title="details" class="var-name">$source</a>
+				</div>
+								<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$tmp" title="details" class="var-name">$tmp</a>
+				</div>
+							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#addElement" title="details" class="method-name">addElement</a>
+											(<span class="var-type">SassElement</span>&nbsp;<span class="var-name">$element</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#calculate" title="details" class="method-name">calculate</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$expression</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#calc_call" title="details" class="method-name">calc_call</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$other</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$operation</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#cleanLine" title="details" class="method-name">cleanLine</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$line</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">integer</span>
+										<a href="#countLevel" title="details" class="method-name">countLevel</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$line</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#display" title="details" class="method-name">display</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">array</span>
+										<a href="#getConstants" title="details" class="method-name">getConstants</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../../phpHaml/Sass/SassElementsList.html">SassElementsList</a></span>
+										<a href="#getElements" title="details" class="method-name">getElements</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getFile" title="details" class="method-name">getFile</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getPath" title="details" class="method-name">getPath</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getRenderer" title="details" class="method-name">getRenderer</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getSource" title="details" class="method-name">getSource</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getTmp" title="details" class="method-name">getTmp</a>
+										()
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Constructor.png" alt=" "/>
+											<span class="method-result">SassParser</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tmp</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#hex2rgb" title="details" class="method-name">hex2rgb</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$m</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#rcalc" title="details" class="method-name">rcalc</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$e</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#render" title="details" class="method-name">render</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#sass" title="details" class="method-name">sass</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$source</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">1</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setConstant" title="details" class="method-name">setConstant</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setConstants" title="details" class="method-name">setConstants</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$constants</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setElements" title="details" class="method-name">setElements</a>
+											(<span class="var-type">SassElementsList</span>&nbsp;<span class="var-name">$elements</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setFile" title="details" class="method-name">setFile</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setPath" title="details" class="method-name">setPath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setRenderer" title="details" class="method-name">setRenderer</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$renderer</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setSource" title="details" class="method-name">setSource</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$source</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#setTmp" title="details" class="method-name">setTmp</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tmp</span>)
+									</div>
+								
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#__toString" title="details" class="method-name">__toString</a>
+										()
+									</div>
+							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-const-summary">Constants</a> (<a href="#sec-consts">details</a>)
+							
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$colors" id="$colors"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$colors</span>
+			 = <span class="var-default">array<br />	(<br />	//	Name				Red		Green	Blue<br />		'aqua'		=&gt; array(0,		255,	255),'black'=&gt;array(0,0,0),'blue'=&gt;array(0,0,255),'fuchsia'=&gt;array(255,0,255),'gray'=&gt;array(128,128,128),'green'=&gt;array(0,128,0),'lime'=&gt;array(0,255,0),'maroon'=&gt;array(128,0,0),'navy'=&gt;array(0,0,128),'olive'=&gt;array(128,128,0),'purple'=&gt;array(128,0,128),'red'=&gt;array(255,0,0),'silver'=&gt;array(192,192,192),'teal'=&gt;array(0,128,128),'white'=&gt;array(255,255,255),'yellow'=&gt;array(255,255,0))</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a576">576</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">RGB representation of colors by names</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$constants" id="$constants"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$constants</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a416">416</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of constants assigned to parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$elements" id="$elements"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type"><a href="../../phpHaml/Sass/SassElementsList.html">SassElementsList</a></span>
+			<span class="var-name">$elements</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a352">352</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">List of elements</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$file" id="$file"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$file</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a140">140</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">File assigned to Sass parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$instance" id="$instance"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type"><a href="../../phpHaml/Sass/SassParser.html">SassParser</a></span>
+			<span class="var-name">$instance</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a39">39</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Instance of SassParser</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$path" id="$path"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$path</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a82">82</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Path</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$renderer" id="$renderer"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$renderer</span>
+			 = <span class="var-default"> SassRenderer::NESTED</span>			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a203">203</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Type of SassRenderer</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Sass/SassRenderer.html">SassRenderer</a></li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$source" id="$source"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$source</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a173">173</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sass source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$tmp" id="$tmp"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$tmp</span>
+						(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a111">111</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Temporary directory</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodaddElement" id="addElement"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">addElement</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a382">382</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add element</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			addElement
+		</span>
+					(<span class="var-type">SassElement</span>&nbsp;<span class="var-name">$element</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../phpHaml/Sass/SassElement.html">SassElement</a></span>
+				<span class="var-name">$element</span><span class="var-description">: Element</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcalculate" id="calculate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">calculate</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a459">459</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Calculate attribute data</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Result</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			calculate
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$expression</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$expression</span><span class="var-description">: Expression</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcalc_call" id="calc_call"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">calc_call</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a507">507</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Execute opearation on numbers, colors, strings</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			calc_call
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$other</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$operation</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Value</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$other</span><span class="var-description">: Other</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$operation</span><span class="var-description">: Operation (add, sub, mul, div)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcleanLine" id="cleanLine"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">cleanLine</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a331">331</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clean line from TOKEN_INDENT</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			cleanLine
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$line</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$line</span><span class="var-description">: Line</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodcountLevel" id="countLevel"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">countLevel</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a342">342</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Count level of line</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			countLevel
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$line</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$line</span><span class="var-description">: Line</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methoddisplay" id="display"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">display</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a406">406</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render and display Sass code</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Sass/SassParser.html#methodrender">SassParser::render()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			display
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: Filename</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: SassRenderer type</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodgetConstants" id="getConstants"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getConstants</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a423">423</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the constants. List of constants assigned to parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getConstants
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetElements" id="getElements"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getElements</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a359">359</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the elements. List of elements</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../phpHaml/Sass/SassElementsList.html">SassElementsList</a></span>
+		<span class="method-name">
+			getElements
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetFile" id="getFile"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getFile</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a147">147</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the file. File assigned to Sass parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getFile
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetPath" id="getPath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getPath</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a89">89</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the path. Path</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPath
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetRenderer" id="getRenderer"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getRenderer</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a210">210</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the renderer. Type of SassRenderer</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getRenderer
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetSource" id="getSource"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getSource</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a180">180</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the source. Sass source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getSource
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="methodgetTmp" id="getTmp"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getTmp</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a118">118</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get the tmp. Temporary directory</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getTmp
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Constructor.png" />
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a62">62</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The constructor</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SassParser</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$tmp</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tmp</span><span class="var-description">: Temporary directory</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: SassRenderer type</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodhex2rgb" id="hex2rgb"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">hex2rgb</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a551">551</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replace HEX color representation  to CSS rgb() function</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			hex2rgb
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$m</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$m</span><span class="var-description">: HEX color (3 or 6 letters)</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodrcalc" id="rcalc"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">rcalc</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a528">528</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Simple calculator (without parenthesis)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			rcalc
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$e</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$e</span><span class="var-description">: Expression</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodrender" id="render"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">render</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a234">234</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render Sass code</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			render
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span> = <span class="var-default">null</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: Filename</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: SassRenderer type</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsass" id="sass"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">sass</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a48">48</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parse Sass code</p>
+	<ul class="tags">
+				<li><span class="field">static:</span> </li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			sass
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$source</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">1</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">1</span><span class="var-description">: Array of constants</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$source</span><span class="var-description">: Source</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetConstant" id="setConstant"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setConstant</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a447">447</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set constant</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setConstant
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetConstants" id="setConstants"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setConstants</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a434">434</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the constants. List of constants assigned to parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setConstants
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$constants</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$constants</span><span class="var-description">: Constants data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetElements" id="setElements"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setElements</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a370">370</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the elements. List of elements</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setElements
+		</span>
+					(<span class="var-type">SassElementsList</span>&nbsp;<span class="var-name">$elements</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../phpHaml/Sass/SassElementsList.html">SassElementsList</a></span>
+				<span class="var-name">$elements</span><span class="var-description">: Elements data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetFile" id="setFile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setFile</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a158">158</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the file. File assigned to Sass parser</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setFile
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: file data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetPath" id="setPath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setPath</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a100">100</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the path. Path</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setPath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetRenderer" id="setRenderer"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setRenderer</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a221">221</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the renderer. Type of SassRenderer</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setRenderer
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$renderer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$renderer</span><span class="var-description">: Renderer data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetSource" id="setSource"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setSource</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a191">191</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the source. Sass source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setSource
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$source</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$source</span><span class="var-description">: Source data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="methodsetTmp" id="setTmp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setTmp</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a129">129</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the tmp. Temporary directory</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">object</span>
+		<span class="method-name">
+			setTmp
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tmp</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tmp</span><span class="var-description">: Tmp data</span>			</li>
+				</ul>
+		
+		
+	</div>
+<a name="method__toString" id="__toString"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">__toString</span> (line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a394">394</a></span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Render Sass code</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+				<li><span class="field">see:</span> <a href="../../phpHaml/Sass/SassParser.html#methodrender">SassParser::render()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			__toString
+		</span>
+				()
+			</div>
+	
+		
+		
+	</div>
+						
+		</div>
+	</div>
+
+	<a name="sec-consts"></a>
+	<div class="info-box">
+		<div class="info-box-title">Class Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Constants</a> (<span class="disabled">details</span>)
+						
+			
+												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="constHEX" id="HEX"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">HEX</span>
+			 = <span class="const-default"> '0123456789ABCDEF'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a569">569</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Hex characters</p>
+	
+	
+</div>
+<a name="constINDENT" id="INDENT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">INDENT</span>
+			 = <span class="const-default"> 2</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a597">597</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_ADDITION" id="TOKEN_ADDITION"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_ADDITION</span>
+			 = <span class="const-default"> '+'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a609">609</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_ATTRIBUTE" id="TOKEN_ATTRIBUTE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_ATTRIBUTE</span>
+			 = <span class="const-default"> ':'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a602">602</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_ATTRIBUTE_CALCULATE" id="TOKEN_ATTRIBUTE_CALCULATE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_ATTRIBUTE_CALCULATE</span>
+			 = <span class="const-default"> '='</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a606">606</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_ATTRIBUTE_NAMESPACE" id="TOKEN_ATTRIBUTE_NAMESPACE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_ATTRIBUTE_NAMESPACE</span>
+			 = <span class="const-default"> ':'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a603">603</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_COMMENT" id="TOKEN_COMMENT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_COMMENT</span>
+			 = <span class="const-default"> '/'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a601">601</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_CONSTANT" id="TOKEN_CONSTANT"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_CONSTANT</span>
+			 = <span class="const-default"> '!'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a604">604</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_CONSTANT_VALUE" id="TOKEN_CONSTANT_VALUE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_CONSTANT_VALUE</span>
+			 = <span class="const-default"> '='</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a605">605</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_DIVISION" id="TOKEN_DIVISION"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_DIVISION</span>
+			 = <span class="const-default"> '/'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a608">608</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_INDENT" id="TOKEN_INDENT"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_INDENT</span>
+			 = <span class="const-default"> ' '</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a599">599</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_LEFT_BRACKET" id="TOKEN_LEFT_BRACKET"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_LEFT_BRACKET</span>
+			 = <span class="const-default"> '('</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a611">611</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_LINE" id="TOKEN_LINE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_LINE</span>
+			 = <span class="const-default"> &quot;\n&quot;</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a600">600</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_MULTIPLICATION" id="TOKEN_MULTIPLICATION"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_MULTIPLICATION</span>
+			 = <span class="const-default"> '*'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a607">607</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_RIGHT_BRACKET" id="TOKEN_RIGHT_BRACKET"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_RIGHT_BRACKET</span>
+			 = <span class="const-default"> ')'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a612">612</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_STRING" id="TOKEN_STRING"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_STRING</span>
+			 = <span class="const-default"> '&quot;'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a613">613</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constTOKEN_SUBTRACTION" id="TOKEN_SUBTRACTION"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="const-title">
+			<span class="const-name">TOKEN_SUBTRACTION</span>
+			 = <span class="const-default"> '-'</span>
+			(line <span class="line-number"><a href="../..//__filesource/fsource_phpHaml_Sass_includessassSassParser.class.php.html#a610">610</a></span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+						
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Mon, 09 Jul 2007 10:05:10 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.3.0RC3</a>
+	</p>
+	</div></body>
+</html>

@@ -40,6 +40,14 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals("  Bye!", $this->parser->fetch()); // FIXME: whitespace?
 	}
 
+	public function testElseSafe2()
+	{
+		$this->parser->setSource("#test0\n  #test1\n    - if(false)\n      Hi!\n    - else\n      Bye!");
+		$this->assertEquals("<div id=\"test0\">\n  <div id=\"test1\">\n      Bye!\n  </div>\n</div>", $this->parser->fetch()); // FIXME: whitespace?
+		$this->parser->setSource("#test0\n  #test1\n    #test2\n      - if(false)\n        Hi!\n      - else\n        Bye!");
+		$this->assertEquals("<div id=\"test0\">\n  <div id=\"test1\">\n    <div id=\"test2\">\n        Bye!\n    </div>\n  </div>\n</div>", $this->parser->fetch()); // FIXME: whitespace?
+	}
+
 	public function testCommas()
 	{
 		$this->parser->setSource("%a{ :href => 'a,b,c',:rel=> 'link'}");

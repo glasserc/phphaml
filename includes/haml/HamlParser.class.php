@@ -567,7 +567,7 @@ class HamlParser
 		}
 		foreach ($this->aChildren as $oChild)
 			$sCompiled .= $oChild->render();
-		// For some reason, spaces keep accumulating before the else
+		// For some reason, spaces keep accumulating  the else
 		$sCompiled = preg_replace('|<\?php \} \?>\s*?<\?php\s+else \{\s*\?>|ius', '<?php } else { ?>', $sCompiled);
 		return $sCompiled;
 	}
@@ -731,6 +731,7 @@ class HamlParser
 			// Check for block
 			if (preg_match('/^('.implode('|', self::$aPhpBlocks).')/', $aMatches[1]))
 			  $this->bBlock = $bBlock = true;
+			// FIXME: indenting here is probably for aesthetics, since it's trying to be careful with generating the right spacing.
 			$sParsedBegin = '<?php ' . $this->indent($aMatches[1] . ($bBlock ? ' { ' : ';'), -2, false)  . '?>';
 			if ($bBlock)
 			  $sParsedEnd = '<?php } ?>';

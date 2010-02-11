@@ -61,3 +61,11 @@ So far the patches included here are:
   them. I think it might be possible to be a little smarter and
   translate the Ruby expression into a PHP expression without
   splitting on commas, but I haven't quite figured out how yet.
+
+* reentrancy: previously PHPHaml had a giant static $aVariables array,
+  which was modified by calling assign() on *any* HamlParser
+  object. This sucks if you have multiple HamlParsers, want to render
+  HAML recursively, etc. Turning that into an object-local variable
+  was pretty trivial. Additionally, we found it convenient to pass a
+  $context array to render(), which is used in addition to
+  $this->aVariables, to populate the scope of the HAML code.

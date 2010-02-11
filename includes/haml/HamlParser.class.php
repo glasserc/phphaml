@@ -470,7 +470,7 @@ class HamlParser
 			}
 			// Expand compiled template
 			// set up variables for context
-			foreach (self::$aVariables as $__sName => $__mValue)
+			foreach ($this->aVariables as $__sName => $__mValue)
 				$$__sName = $__mValue;
 			ob_start();		// start a new output buffer
 			require $__sCompiled;
@@ -1244,7 +1244,7 @@ class HamlParser
 	 *
 	 * @var array
 	 */
-	protected static $aVariables = array();
+	protected $aVariables = array();
 
 	/**
 	 * Assign variable
@@ -1262,7 +1262,7 @@ class HamlParser
 	 */
 	public function assign($sName, $sValue)
 	{
-		self::$aVariables[$sName] = $sValue;
+		$this->aVariables[$sName] = $sValue;
 		return $this;
 	}
 
@@ -1285,7 +1285,7 @@ class HamlParser
 	 */
 	public function append($aData)
 	{
-		self::$aVariables = array_merge(self::$aVariables, $aData);
+		$this->aVariables = array_merge($this->aVariables, $aData);
 		return $this;
 	}
 
@@ -1296,7 +1296,7 @@ class HamlParser
 	 */
 	public function clearVariables()
 	{
-		self::$aVariables = array();
+		$this->aVariables = array();
 		return $this;
 	}
 
@@ -1401,7 +1401,7 @@ class HamlParser
 	 */
 	public function getVariables()
 	{
-		return self::$aVariables;
+		return $this->aVariables;
 	}
 
 	/**

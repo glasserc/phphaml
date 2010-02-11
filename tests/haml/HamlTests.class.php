@@ -49,6 +49,8 @@ final class HamlTests extends PHPUnit_Framework_TestCase
 		$parser2 = new HamlParser();
 		$this->assertEquals(0, count($parser2->getVariables()));
 		$this->assertEquals(1, count($this->parser->getVariables()));
+		$parser2->setSource('= $var');
+		$this->assertEquals("Hello", $parser2->render(array('var' => "Hello")));
 	}
 }
 

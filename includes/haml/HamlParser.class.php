@@ -420,7 +420,7 @@ class HamlParser
 	 * @see HamlParser::fetch()
 	 * @return string
 	 */
-	public function render()
+	public function render(array $aContext = array())
 	{
 		$__aSource = explode(self::TOKEN_LINE, $this->sRealSource = $this->sSource = $this->parseBreak($this->sSource));
 		$__sCompiled = '';
@@ -468,29 +468,36 @@ class HamlParser
 				$this->sSource = $this->sRealSource;
 				$__sCompiled = $__oCache->setCached($this->parseFile($__aSource))->cacheIt()->getFilename();
 			}
-			// Expand compiled template
-			// set up variables for context
-			foreach ($this->aVariables as $__sName => $__mValue)
-				$$__sName = $__mValue;
-			ob_start();		// start a new output buffer
-			require $__sCompiled;
-			if ($this->isDebug())
-				@unlink($__sCompiled);
-			$__c = rtrim(ob_get_clean()); // capture the result, and discard ob
-			// Call filters
-			foreach ($this->aFilters as $mFilter)
-				$__c = call_user_func($mFilter, $__c);
-			if ($this->isDebug())
-			{
-				header('Content-Type: text/plain');
-				$__a = "\nFile $this->sFile:\n";
-				foreach (explode("\n", $__sGenSource) as $iKey => $sLine)
-					$__a .= 'F' . ($iKey + 1) . ":\t$sLine\n";
-				$__c .= rtrim($__a);
-			}
+			$__c = $this->execute($__sCompiled, $aContext);
 			return $__c;
 		}
 		return $__sCompiled;
+	}
+
+	public function execute($__sCompiled, $__sContext){
+		// Expand compiled template
+		// set up variables for context
+		foreach ($this->aVariables as $__sName => $__mValue)
+			$$__sName = $__mValue;
+		foreach ($__sContext as $__sName => $__mValue)
+			$$__sName = $__mValue;
+		ob_start();		// start a new output buffer
+		require $__sCompiled;
+		if ($this->isDebug())
+			@unlink($__sCompiled);
+		$__c = rtrim(ob_get_clean()); // capture the result, and discard ob
+		// Call filters
+		foreach ($this->aFilters as $mFilter)
+			$__c = call_user_func($mFilter, $__c);
+		if ($this->isDebug())
+		{
+			header('Content-Type: text/plain');
+			$__a = "\nFile $this->sFile:\n";
+			foreach (explode("\n", $__sGenSource) as $iKey => $sLine)
+				$__a .= 'F' . ($iKey + 1) . ":\t$sLine\n";
+			$__c .= rtrim($__a);
+		}
+		return $__c;
 	}
 
 	/**

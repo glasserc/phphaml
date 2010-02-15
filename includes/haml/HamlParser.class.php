@@ -782,7 +782,7 @@ class HamlParser
 			while (preg_match('/\\'.self::TOKEN_OPTIONS_LEFT.'(.*?)\\'.self::TOKEN_OPTIONS_RIGHT.'/', $sSource, $aMatches))
 			{
 				$sSource = str_replace($aMatches[0], '', $sSource);
-				$sOptions = preg_replace('/'.self::TOKEN_OPTION.'/', '"$1"', $aMatches[1]);
+				$sOptions = preg_replace('/'.self::TOKEN_OPTION.'/', '"$1" =>', $aMatches[1]);
 				$aAttributes['_inline'][] = $sOptions;
 			}
 
@@ -1128,7 +1128,7 @@ class HamlParser
 	/**
 	 * Start option name
 	 */
-	const TOKEN_OPTION = ":(\w+)";
+	const TOKEN_OPTION = ":(\w+)\s*=>";
 
 	/**
 	 * Start option value

@@ -120,8 +120,8 @@ final class AttributeHamlTests extends PHPUnit_Framework_TestCase
 	public function testAttributesDoubleColon()
 	{
 		$this->parser->assign('attrs', array('name' => 'foo', 'style' => 'font-size: 16;'));
-		$this->parser->setSource('%input{ :xml:lang => "en-us", :foo => test_scope::hi, $attrs }');
-		$this->assertEquals('<input name="foo" style="font-size: 16;" foo="hi" xml:lang="en-us" />', $this->parser->fetch());
+		$this->parser->setSource('%input{ :xml:lang => "en-us", :http-equiv => "Content-Type",:foo => test_scope::hi, $attrs }');
+		$this->assertEquals('<input name="foo" style="font-size: 16;" foo="hi" http-equiv="Content-Type" xml:lang="en-us" />', $this->parser->fetch());
 	}
 
 	/**

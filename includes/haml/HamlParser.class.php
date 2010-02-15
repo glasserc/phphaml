@@ -577,6 +577,9 @@ class HamlParser
 		$sCompiled = '';
 		foreach ($aSource as $iKey => $sSource)
 		{
+			// Skip blank lines
+			if(trim($sSource) == "") continue;
+
 			$iLevel = $this->countLevel($sSource);
 			$aLevels[$iLevel] = $this->createLine($sSource, $aLevels[$iLevel - 1], $iKey + 1);
 		}

@@ -61,4 +61,9 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		$this->parser->setSource("Hi\n there");
 		$this->parser->fetch();
 	}
+
+	public function testBlankLines(){
+		$this->parser->setSource("%div\n  Hi\n\n  there");
+		$this->assertEquals("<div>\n  Hi\n  there\n</div>", $this->parser->fetch());
+	}
 }

@@ -434,44 +434,49 @@ class HamlParser
 				$__sCompiled = $__oCache->getFilename();
 			else
 			{
-				$__sGenSource = $this->sSource;
-				do
-				{
-					$__iIndent = 0;
-					$__iIndentLevel = 0;
-					foreach ($__aSource as $__iKey => $__sLine)
-					{
-						$__iLevel = $this->countLevel($__sLine);
-						if ($__iLevel <= $__iIndentLevel)
-						$__iIndent = $__iIndentLevel = 0;
-						if (preg_match('/\\'.self::TOKEN_LEVEL.'([0-9]+)$/', $__sLine, $__aMatches))
-						{
-							$__iIndent = (int)$__aMatches[1];
-							$__iIndentLevel = $__iLevel;
-							$__sLine = preg_replace('/\\'.self::TOKEN_LEVEL."$__iIndent$/", '', $__sLine);
-						}
-						$__sLine = str_repeat(self::TOKEN_INDENT, $__iIndent * self::INDENT) . $__sLine;
-						$__aSource[$__iKey] = $__sLine;
-						if (preg_match('/^(\s*)'.self::TOKEN_INCLUDE.' (.+)/', $__sLine, $aMatches))
-						{
-							$__sISource = file_get_contents($__sIFile = $this->getFilename($aMatches[2]));
-							if ($this->isDebug())
-								$__sISource = "// Begin file $__sIFile\n$__sISource\n// End file $__sIFile";
-							$__sIncludeSource = $this->sourceIndent($__sISource, $__iIndent ? $__iIndent : $__iLevel);
-							$__sLine = str_replace($aMatches[1] . self::TOKEN_INCLUDE . " {$aMatches[2]}", $__sIncludeSource, $__sLine);
-							$__aSource[$__iKey] = $__sLine;
-						}
-						$this->sSource = implode(self::TOKEN_LINE, $__aSource);
-					}
-					$__aSource = explode(self::TOKEN_LINE, $this->sSource = $__sGenSource = $this->parseBreak($this->sSource));
-				} while (preg_match('/(\\'.self::TOKEN_LEVEL.'[0-9]+)|(\s*[^!]'.self::TOKEN_INCLUDE.' .+)/', $this->sSource));
-				$this->sSource = $this->sRealSource;
+				$__sGenSource = $this->parseIncludes($this->sSource);
+				$this->sSource = $this->sRealSource = $__sGenSource;
+				$__aSource = explode(self::TOKEN_LINE, $__sGenSource);
 				$__sCompiled = $__oCache->setCached($this->parseFile($__aSource))->cacheIt()->getFilename();
 			}
 			$__c = $this->execute($__sCompiled, $aContext);
 			return $__c;
 		}
 		return $__sCompiled;
+	}
+
+	public function parseIncludes($source){
+		do
+		{
+			$__aSource = explode(self::TOKEN_LINE, $source = $__sGenSource = $this->parseBreak($source));
+			$__iIndent = 0;
+			$__iIndentLevel = 0;
+			foreach ($__aSource as $__iKey => $__sLine)
+			{
+				$__iLevel = $this->countLevel($__sLine);
+				if ($__iLevel <= $__iIndentLevel)
+					$__iIndent = $__iIndentLevel = 0;
+				if (preg_match('/\\'.self::TOKEN_LEVEL.'([0-9]+)$/', $__sLine, $__aMatches))
+				{
+					$__iIndent = (int)$__aMatches[1];
+					$__iIndentLevel = $__iLevel;
+					$__sLine = preg_replace('/\\'.self::TOKEN_LEVEL."$__iIndent$/", '', $__sLine);
+				}
+				$__sLine = str_repeat(self::TOKEN_INDENT, $__iIndent * self::INDENT) . $__sLine;
+				$__aSource[$__iKey] = $__sLine;
+				if (preg_match('/^(\s*)'.self::TOKEN_INCLUDE.' (.+)/', $__sLine, $aMatches))
+				{
+					$__sISource = file_get_contents($__sIFile = $this->getFilename($aMatches[2]));
+					if ($this->isDebug())
+						$__sISource = "// Begin file $__sIFile\n$__sISource\n// End file $__sIFile";
+					$__sIncludeSource = $this->sourceIndent($__sISource, $__iIndent ? $__iIndent : $__iLevel);
+					$__sLine = str_replace($aMatches[1] . self::TOKEN_INCLUDE . " {$aMatches[2]}", $__sIncludeSource, $__sLine);
+					$__aSource[$__iKey] = $__sLine;
+				}
+				$source = implode(self::TOKEN_LINE, $__aSource);
+			}
+		} while (preg_match('/(\\'.self::TOKEN_LEVEL.'[0-9]+)|(\s*[^!]'.self::TOKEN_INCLUDE.' .+)/', $source));
+		return $source;
 	}
 
 	public function execute($__sCompiled, $__sContext){

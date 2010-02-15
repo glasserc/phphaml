@@ -770,20 +770,8 @@ class HamlParser
 			while (preg_match('/\\'.self::TOKEN_OPTIONS_LEFT.'(.*?)\\'.self::TOKEN_OPTIONS_RIGHT.'/', $sSource, $aMatches))
 			{
 				$sSource = str_replace($aMatches[0], '', $sSource);
-				$aOptions = preg_split('/'.self::TOKEN_OPTIONS_SEPARATOR.'/', $aMatches[1]);
-				foreach ($aOptions as $sOption)
-				{
-					$aOption = explode(self::TOKEN_OPTION_VALUE, trim($sOption), 2);
-					if(count($aOption) == 1 && strpos($sOption, "$") !== FALSE){ // Use "$" to try to avaid the comma-in-quotes problem
-						$aAttributes['_inline'][] = $sOption;
-					}
-					else {
-						foreach ($aOption as $k => $o)
-							$aOption[$k] = trim($o);
-						$sOptionName = ltrim($aOption[0], self::TOKEN_OPTION);
-						$aAttributes[$sOptionName] = trim($aOption[1], self::TOKEN_OPTION);
-					}
-				}
+				$sOptions = preg_replace('/'.self::TOKEN_OPTION.'/', '"$1"', $aMatches[1]);
+				$aAttributes['_inline'][] = $sOptions;
 			}
 
 			$sFirst = '['.self::TOKEN_TAG.self::TOKEN_ID.self::TOKEN_CLASS.self::TOKEN_PARSE_PHP.']';
@@ -865,7 +853,7 @@ class HamlParser
 				$inline = $aAttributes['_inline'];
 				unset($aAttributes['_inline']);
 				if (!empty($aAttributes) || !empty($sAutoVar) || !empty($inline))
-					$sAttributes = '<?php $this->writeAttributes('.$this->arrayExport($aAttributes).(!empty($sAutoVar) ? ", \$this->parseSquareBrackets($sAutoVar)" : '' ).(!empty($inline)? ', ' . implode($inline, ', ') : '') . '); ?>';
+					$sAttributes = '<?php $this->writeAttributes('.$this->arrayExport($aAttributes).(!empty($sAutoVar) ? ", \$this->parseSquareBrackets($sAutoVar)" : '' ).(!empty($inline)? ', array(' . implode($inline, ', ').')' : '') . '); ?>';
 				$this->bBlock = $this->oParent->bBlock;
 				$iLevelM = $this->oParent->bBlock || $this->bBlock ? -1 : 0;
 				// Check for closed tag
@@ -1124,7 +1112,7 @@ class HamlParser
 	/**
 	 * Start option name
 	 */
-	const TOKEN_OPTION = ':';
+	const TOKEN_OPTION = ":(\w+)";
 
 	/**
 	 * Start option value
@@ -1450,12 +1438,18 @@ class HamlParser
 	protected function writeAttributes()
 	{
 		$aAttr = array();
+		// Left takes precedence because cultivated options were in
+		// argument 0
 		foreach (func_get_args() as $aArray)
-			$aAttr = array_merge($aAttr, $aArray);
+			$aAttr = array_merge($aArray, $aAttr);
 		ksort($aAttr);
-		foreach ($aAttr as $sName => $sValue)
-			if ($sValue)
+		foreach ($aAttr as $sName => $sValue){
+			if(is_integer($sName)){
+				$this->writeAttributes($sValue);
+			}
+			else if ($sValue)
 				echo " $sName=\"".htmlentities($sValue).'"';
+		}
 	}
 
 	/**

@@ -101,6 +101,15 @@ final class AttributeHamlTests extends PHPUnit_Framework_TestCase
 	}
 	
 	/**
+	 * Test commas in attribute values
+	 */
+	public function testAttributesCommas()
+	{
+		$this->parser->assign('attrs', array('name' => 'foo', 'style' => 'font-size: 16;'));
+		$this->parser->setSource('%input{ :type => "this, is, sparta", $attrs }');
+		$this->assertEquals('<input name="foo" style="font-size: 16;" type="this, is, sparta" />', $this->parser->fetch());
+	}
+	/**
 	 * Test attributes stack
 	 */
 	public function testAttributesListsStack()

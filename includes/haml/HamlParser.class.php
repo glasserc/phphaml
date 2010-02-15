@@ -573,6 +573,7 @@ class HamlParser
 	 */
 	protected function parseFile($aSource)
 	{
+		// Currently "active" HamlParsers at each level.
 		$aLevels = array(-1 => $this);
 		$sCompiled = '';
 		foreach ($aSource as $iKey => $sSource)

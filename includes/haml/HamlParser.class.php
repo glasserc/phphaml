@@ -1128,7 +1128,7 @@ class HamlParser
 	/**
 	 * Start option name
 	 */
-	const TOKEN_OPTION = ":(\w+)\s*=>";
+	const TOKEN_OPTION = ":([\\w:_]+)\s*=>";
 
 	/**
 	 * Start option value

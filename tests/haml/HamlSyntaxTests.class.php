@@ -53,4 +53,12 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		$this->parser->setSource("%a{ :href => 'a,b,c',:rel=> 'link'}");
 		$this->assertEquals('<a href="a,b,c" rel="link"></a>', $this->parser->fetch());
 	}
+
+	/**
+	 * @expectedException HamlException
+	 */
+	public function testBadIndent(){
+		$this->parser->setSource("Hi\n there");
+		$this->parser->fetch();
+	}
 }

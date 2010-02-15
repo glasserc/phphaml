@@ -13,6 +13,9 @@
 
 require_once dirname(__FILE__) . '/../common/CommonCache.class.php';
 
+class HamlException extends Exception {
+}
+
 /**
  * Haml parser.
  *
@@ -1049,7 +1052,11 @@ class HamlParser
 	 */
 	protected function countLevel($sLine)
 	{
-		return (strlen($sLine) - strlen(trim($sLine, self::TOKEN_INDENT))) / self::INDENT;
+		$spaces = (strlen($sLine) - strlen(trim($sLine, self::TOKEN_INDENT)));
+		if($spaces % self::INDENT != 0){
+			throw new HamlException("Invalid indent on line '$sLine': $spaces space(s) (needed multiple of " . self::INDENT . ")");
+		}
+		return $spaces / self::INDENT;
 	}
 
 	/**

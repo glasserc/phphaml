@@ -527,7 +527,7 @@ class HamlParser
 	 */
 	protected function parseBreak($sFile)
 	{
-		$sFile = preg_replace('/(\w+) +\\'.self::TOKEN_BREAK.'[ \t]*\n[ \t]*/', '\\1 ', $sFile);
+		$sFile = preg_replace('/(\S+) +\\'.self::TOKEN_BREAK.'[ \t]*\n[ \t]*/', '\\1 ', $sFile);
 		return $sFile;
 	}
 

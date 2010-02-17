@@ -34,6 +34,15 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		//$this->assertEquals("<p>Hi |</p>\nthere", $this->parser->fetch());
 	}
 
+	public function testMultilineNonword()
+	{
+		$this->parser->setSource("%p= 'hi'. |\n  'there'\n");
+		$this->assertEquals("<p>hithere</p>", $this->parser->fetch());
+		// This isn't gonna work easily
+		$this->parser->setSource("%p Hi.\n- # |\n%p there");
+		$this->assertEquals("<p>Hi.</p>\n<p>there</p>", $this->parser->fetch());
+	}
+
 	public function testElseSafe()
 	{
 		$this->parser->setSource("- if(false)\n  Hi!\n- else\n  Bye!");

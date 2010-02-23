@@ -587,7 +587,7 @@ class HamlParser
 		foreach ($this->aChildren as $oChild)
 			$sCompiled .= $oChild->render();
 		// For some reason, spaces keep accumulating  the else
-		$sCompiled = preg_replace('|<\?php \} \?>\s*?<\?php\s+else \{\s*\?>|ius', '<?php } else { ?>', $sCompiled);
+		$sCompiled = preg_replace('|<\?php \} \?>\s*<\?php\s+else(\s*if)?|ius', '<?php } else\1 ', $sCompiled);
 		return $sCompiled;
 	}
 

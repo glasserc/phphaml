@@ -181,6 +181,12 @@ final class TagHamlTests extends PHPUnit_Framework_TestCase
 		$this->parser->setSource('%foo-bar Hello, World!');
 		$this->assertEquals('<foo-bar>Hello, World!</foo-bar>', $this->parser->fetch());
 	}
+
+	public function testFrameBorder()
+	{
+		$this->parser->setSource('%iframe{ :frameBorder => "0" } Hello!!');
+		$this->assertEquals('<iframe frameBorder="0">Hello!!</iframe>', $this->parser->fetch());
+	}
 }
 
 ?>

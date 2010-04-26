@@ -1463,7 +1463,7 @@ class HamlParser
 			if(is_integer($sName)){
 				$this->writeAttributes($sValue);
 			}
-			else if ($sValue)
+			else if ($sValue !== null && $sValue !== false)
 				echo " $sName=\"".htmlentities($sValue).'"';
 		}
 	}

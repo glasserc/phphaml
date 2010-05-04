@@ -662,6 +662,7 @@ class HamlLine
 			}
 		}
 		// Children appending
+		$lastWhitespaceOutside = null;
 		foreach ($this->aChildren as $oChild){
 			$sChild = $oChild->parseLine($oChild->sSource);
 			if($oChild->bWhitespaceOutside){

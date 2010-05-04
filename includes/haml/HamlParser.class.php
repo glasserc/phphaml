@@ -668,6 +668,10 @@ class HamlLine
 				$sParsed = rtrim($sParsed);
 				$sChild = trim($sChild);
 			}
+			if($lastWhitespaceOutside){
+				$sChild = ltrim($sChild);
+			}
+			$lastWhitespaceOutside = $oChild->bWhitespaceOutside;
 			$sParsed .= $sChild;
 		}
 		// Check for IE comment

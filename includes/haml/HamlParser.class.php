@@ -1274,7 +1274,7 @@ class HamlParser extends HamlLine {
 			$aLevels[$iLevel] = $this->createLine($sSource, $aLevels[$iLevel - 1], $iKey + 1);
 		}
 		$sCompiled = $this->parseLine('');  // just invokes children recursively
-		// For some reason, spaces keep accumulating behind the else
+		// For some reason, spaces keep accumulating before the else
 		$sCompiled = preg_replace('|<\?php \} \?>\s*<\?php\s+else(\s*if)?|ius', '<?php } else\1 ', $sCompiled);
 		return $sCompiled;
 	}

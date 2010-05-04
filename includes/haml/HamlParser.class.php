@@ -17,63 +17,13 @@ class HamlException extends Exception {
 }
 
 /**
- * Haml parser.
+ * Base class for Haml parser.
  *
- * Haml is templating language. It is very simple and clean.
- * Example Haml code
- * <code>
- * !!! 1.1
- * %html
- *   %head
- *     %title= $title ? $title : 'none'
- *     %link{ :rel => 'stylesheet', :type => 'text/css', :href => "$uri/tpl/$theme.css" }
- *   %body
- *     #header
- *       %h1.sitename example.com
- *     #content
- *       / Table with models
- *       %table.config.list
- *         %tr
- *           %th ID
- *           %th Name
- *           %th Value
- *         - foreach ($models as $model)
- *           %tr[$model]
- *             %td= $model->ID
- *             %td= $model->name
- *             %td= $model->value
- *     #footer
- *       %address.author Random Hacker
- * </code>
- * Comparing to original Haml language I added:
- * <ul>
- *   <li>
- *     Support to translations - use '$'
- * <code>
- * %strong$ Log in
- * </code>
- *   </li>
- *   <li>
- *     Including support ('!!') and level changing ('?')
- * <code>
- * !! html
- * !! page.header?2
- * %p?3
- *   Foo bar
- * !! page.footer?2
- * </code>
- *   </li>
- * </ul>
- *
- * @link http://haml.hamptoncatlin.com/ Original Haml parser (for Ruby)
- * @link http://phphaml.sourceforge.net/ Online documentation
- * @link http://sourceforge.net/projects/phphaml/ SourceForge project page
- * @license http://www.opensource.org/licenses/mit-license.php MIT (X11) License
- * @author Amadeusz Jasak <amadeusz.jasak@gmail.com>
- * @package phpHaml
- * @subpackage Haml
+ * This does the real work of parsing HAML.
+ * Handling includes, context/variables, filters etc.
+ * happen in HamlParser.
  */
-class HamlParser
+class HamlLine
 {
 	/**
 	 * Haml source
@@ -227,29 +177,6 @@ class HamlParser
 	public $aDebug = null;
 
 	/**
-	 * Render Haml. Append globals variables
-	 *
-	 * Simple way to use Haml
-	 * <code>
-	 * echo HamlParser::haml('%strong Hello, World!'); // <strong>Hello, World!</strong>
-	 * $foo = 'bar'; // This is global variable
-	 * echo Haml::haml('%strong= "Foo is $foo"'); // <strong>Foo is bar</strong>
-	 * </code>
-	 *
-	 * @param string Haml source
-	 * @return string xHTML
-	 */
-	public static function haml($sSource)
-	{
-		static $__haml_parser;
-		if (!$__haml_parser)
-			$__haml_parser = new HamlParser();
-		$__haml_parser->setSource($sSource);
-		$__haml_parser->append($GLOBALS);
-		return $__haml_parser->fetch();
-	}
-
-	/**
 	 * One time constructor, is executed??
 	 *
 	 * @var boolean
@@ -292,7 +219,7 @@ class HamlParser
 	 * @param object Parent parser
 	 * @return object
 	 */
-	public function setParent(HamlParser $oParent)
+	public function setParent(HamlLine $oParent)
 	{
 		$this->oParent = $oParent;
 		$this->bRemoveBlank = $oParent->bRemoveBlank;
@@ -415,179 +342,6 @@ class HamlParser
 		if (self::$bDebug)
 			$this->bCompile = false;
 		return self::$bDebug;
-	}
-
-	/**
-	 * Render the source or file
-	 *
-	 * @see HamlParser::fetch()
-	 * @return string
-	 */
-	public function render(array $aContext = array())
-	{
-		$__aSource = explode(self::TOKEN_LINE, $this->sRealSource = $this->sSource = $this->parseBreak($this->sSource));
-		$__sCompiled = '';
-		if ($this->oParent instanceof HamlParser)
-			$__sCompiled = $this->parseLine($__aSource[0]);
-		else
-		{
-			$__oCache = new CommonCache($this->sTmp, 'hphp', $this->sSource);
-			$this->aChildren = array();
-			if ($__oCache->isCached() && $this->bCompile && !$this->isDebug())
-				$__sCompiled = $__oCache->getFilename();
-			else
-			{
-				$__sGenSource = $this->parseIncludes($this->sSource);
-				$this->sSource = $this->sRealSource = $__sGenSource;
-				$__aSource = explode(self::TOKEN_LINE, $__sGenSource);
-				$__sCompiled = $__oCache->setCached($this->parseFile($__aSource))->cacheIt()->getFilename();
-			}
-			$__c = $this->execute($__sCompiled, $aContext);
-			return $__c;
-		}
-		return $__sCompiled;
-	}
-
-	public function parseIncludes($source){
-		do
-		{
-			$__aSource = explode(self::TOKEN_LINE, $source = $__sGenSource = $this->parseBreak($source));
-			$__iIndent = 0;
-			$__iIndentLevel = 0;
-			foreach ($__aSource as $__iKey => $__sLine)
-			{
-				$__iLevel = $this->countLevel($__sLine);
-				if ($__iLevel <= $__iIndentLevel)
-					$__iIndent = $__iIndentLevel = 0;
-				if (preg_match('/\\'.self::TOKEN_LEVEL.'([0-9]+)$/', $__sLine, $__aMatches))
-				{
-					$__iIndent = (int)$__aMatches[1];
-					$__iIndentLevel = $__iLevel;
-					$__sLine = preg_replace('/\\'.self::TOKEN_LEVEL."$__iIndent$/", '', $__sLine);
-				}
-				$__sLine = str_repeat(self::TOKEN_INDENT, $__iIndent * self::INDENT) . $__sLine;
-				$__aSource[$__iKey] = $__sLine;
-				if (preg_match('/^(\s*)'.self::TOKEN_INCLUDE.' (.+)/', $__sLine, $aMatches))
-				{
-					$__sISource = file_get_contents($__sIFile = $this->getFilename($aMatches[2]));
-					if ($this->isDebug())
-						$__sISource = "// Begin file $__sIFile\n$__sISource\n// End file $__sIFile";
-					$__sIncludeSource = $this->sourceIndent($__sISource, $__iIndent ? $__iIndent : $__iLevel);
-					$__sLine = str_replace($aMatches[1] . self::TOKEN_INCLUDE . " {$aMatches[2]}", $__sIncludeSource, $__sLine);
-					$__aSource[$__iKey] = $__sLine;
-				}
-				$source = implode(self::TOKEN_LINE, $__aSource);
-			}
-		} while (preg_match('/(\\'.self::TOKEN_LEVEL.'[0-9]+)|(\s*[^!]'.self::TOKEN_INCLUDE.' .+)/', $source));
-		return $source;
-	}
-
-	public function execute($__sCompiled, $__sContext){
-		// Expand compiled template
-		// set up variables for context
-		foreach ($this->aVariables as $__sName => $__mValue)
-			$$__sName = $__mValue;
-		foreach ($__sContext as $__sName => $__mValue)
-			$$__sName = $__mValue;
-		ob_start();		// start a new output buffer
-		require $__sCompiled;
-		if ($this->isDebug())
-			@unlink($__sCompiled);
-		$__c = rtrim(ob_get_clean()); // capture the result, and discard ob
-		// Call filters
-		foreach ($this->aFilters as $mFilter)
-			$__c = call_user_func($mFilter, $__c);
-		if ($this->isDebug())
-		{
-			header('Content-Type: text/plain');
-			$__a = "\nFile $this->sFile:\n";
-			foreach (explode("\n", $__sGenSource) as $iKey => $sLine)
-				$__a .= 'F' . ($iKey + 1) . ":\t$sLine\n";
-			$__c .= rtrim($__a);
-		}
-		return $__c;
-	}
-
-	/**
-	 * Render the source or file
-	 *
-	 * @see HamlParser::fetch()
-	 * @return string
-	 */
-	public function __toString()
-	{
-		return $this->render();
-	}
-
-	/**
-	 * Parse multiline
-	 *
-	 * @param string File content
-	 * @return string
-	 */
-	protected function parseBreak($sFile)
-	{
-		$sFile = preg_replace('/(\S+) +\\'.self::TOKEN_BREAK.'[ \t]*\n[ \t]*/', '\\1 ', $sFile);
-		return $sFile;
-	}
-
-	/**
-	 * Return source of child
-	 *
-	 * @param integer Level
-	 * @return string
-	 */
-	public function getAsSource($iLevel)
-	{
-		$x = ($this->iIndent - $iLevel - 1) * self::INDENT;
-		$sSource = '';
-		if ($x >= 0)
-			$sSource = preg_replace('|^'.str_repeat(self::TOKEN_INDENT, ($iLevel + 1) * self::INDENT).'|', '', $this->sRealSource);
-		foreach ($this->aChildren as $oChild)
-			$sSource .= self::TOKEN_LINE.$oChild->getAsSource($iLevel);
-		return trim($sSource, self::TOKEN_LINE);
-	}
-
-	/**
-	 * Create and append line to parent
-	 *
-	 * @param string Line
-	 * @param object Parent parser
-	 * @param integer Line number
-	 * @return object
-	 */
-	public function createLine($sLine, $parent, $iLine = null)
-	{
-		$oHaml = new HamlParser($this->sPath, $this->bCompile, $parent, array('line'=>$iLine, 'file'=>$this->sFile));
-		$oHaml->setSource(rtrim($sLine, "\r"));
-		$oHaml->iIndent = $parent->iIndent + 1;
-		$parent->aChildren[] = $oHaml;
-		return $oHaml;
-	}
-
-	/**
-	 * Parse file
-	 *
-	 * @param array Array of source lines
-	 * @return string
-	 */
-	protected function parseFile($aSource)
-	{
-		// Currently "active" HamlParsers at each level.
-		$aLevels = array(-1 => $this);
-		$sCompiled = '';
-		foreach ($aSource as $iKey => $sSource)
-		{
-			// Skip blank lines
-			if(trim($sSource) == "") continue;
-
-			$iLevel = $this->countLevel($sSource);
-			$aLevels[$iLevel] = $this->createLine($sSource, $aLevels[$iLevel - 1], $iKey + 1);
-		}
-		$sCompiled = $this->parseLine('');  // just invokes children recursively
-		// For some reason, spaces keep accumulating behind the else
-		$sCompiled = preg_replace('|<\?php \} \?>\s*<\?php\s+else(\s*if)?|ius', '<?php } else\1 ', $sCompiled);
-		return $sCompiled;
 	}
 
 	/**
@@ -897,7 +651,7 @@ class HamlParser
 		}
 		// Children appending
 		foreach ($this->aChildren as $oChild)
-			$sParsed .= $oChild->fetch();
+			$sParsed .= $oChild->parseLine($oChild->sSource);
 		// Check for IE comment
 		if (preg_match('/^\\'.self::TOKEN_COMMENT.'\[(.*?)\](.*)/', $sSource, $aMatches))
 		{
@@ -1004,7 +758,7 @@ class HamlParser
 		if (in_array($this->sTag, self::$aNoIndentTags))
 			return false;
 		else
-			if ($this->oParent instanceof HamlParser)
+			if ($this->oParent instanceof HamlLine)
 				return $this->oParent->canIndent();
 			else
 				return true;
@@ -1226,7 +980,276 @@ class HamlParser
 	 */
 	protected static $aPhpBlocks = array('if', 'else', 'elseif', 'while', 'switch', 'for', 'do');
 
+	/**
+	 * Export array
+	 *
+	 * @return string
+	 */
+	protected function arrayExport()
+	{
+		$sArray = 'array (';
+		$aArray = $aNArray = array();
+		foreach (func_get_args() as $aArg)
+			$aArray = array_merge($aArray, $aArg);
+		foreach ($aArray as $sKey => $sValue)
+		{
+			if (!preg_match('/[\'$"()]/', $sValue))
+				$sValue = "'$sValue'";
+			$aNArray[] = "'$sKey' => $sValue";
+		}
+		$sArray .= implode(', ', $aNArray).')';
+		return $sArray;
+	}
+}
+
+/**
+ * Haml parser.
+ *
+ * Haml is templating language. It is very simple and clean.
+ * Example Haml code
+ * <code>
+ * !!! 1.1
+ * %html
+ *   %head
+ *     %title= $title ? $title : 'none'
+ *     %link{ :rel => 'stylesheet', :type => 'text/css', :href => "$uri/tpl/$theme.css" }
+ *   %body
+ *     #header
+ *       %h1.sitename example.com
+ *     #content
+ *       / Table with models
+ *       %table.config.list
+ *         %tr
+ *           %th ID
+ *           %th Name
+ *           %th Value
+ *         - foreach ($models as $model)
+ *           %tr[$model]
+ *             %td= $model->ID
+ *             %td= $model->name
+ *             %td= $model->value
+ *     #footer
+ *       %address.author Random Hacker
+ * </code>
+ * Comparing to original Haml language I added:
+ * <ul>
+ *   <li>
+ *     Support to translations - use '$'
+ * <code>
+ * %strong$ Log in
+ * </code>
+ *   </li>
+ *   <li>
+ *     Including support ('!!') and level changing ('?')
+ * <code>
+ * !! html
+ * !! page.header?2
+ * %p?3
+ *   Foo bar
+ * !! page.footer?2
+ * </code>
+ *   </li>
+ * </ul>
+ *
+ * @link http://haml.hamptoncatlin.com/ Original Haml parser (for Ruby)
+ * @link http://phphaml.sourceforge.net/ Online documentation
+ * @link http://sourceforge.net/projects/phphaml/ SourceForge project page
+ * @license http://www.opensource.org/licenses/mit-license.php MIT (X11) License
+ * @author Amadeusz Jasak <amadeusz.jasak@gmail.com>
+ * @package phpHaml
+ * @subpackage Haml
+ */
+class HamlParser extends HamlLine {
+	/**
+	 * Render Haml. Append globals variables
+	 *
+	 * Simple way to use Haml
+	 * <code>
+	 * echo HamlParser::haml('%strong Hello, World!'); // <strong>Hello, World!</strong>
+	 * $foo = 'bar'; // This is global variable
+	 * echo Haml::haml('%strong= "Foo is $foo"'); // <strong>Foo is bar</strong>
+	 * </code>
+	 *
+	 * @param string Haml source
+	 * @return string xHTML
+	 */
+	public static function haml($sSource)
+	{
+		static $__haml_parser;
+		if (!$__haml_parser)
+			$__haml_parser = new HamlParser();
+		$__haml_parser->setSource($sSource);
+		$__haml_parser->append($GLOBALS);
+		return $__haml_parser->fetch();
+	}
+
+	/**
+	 * Render the source or file
+	 *
+	 * @see HamlParser::fetch()
+	 * @return string
+	 */
+	public function render(array $aContext = array())
+	{
+		$__aSource = explode(self::TOKEN_LINE, $this->sRealSource = $this->sSource = $this->parseBreak($this->sSource));
+		$__sCompiled = '';
+		$__oCache = new CommonCache($this->sTmp, 'hphp', $this->sSource);
+		$this->aChildren = array();
+		if ($__oCache->isCached() && $this->bCompile && !$this->isDebug())
+			$__sCompiled = $__oCache->getFilename();
+		else
+		{
+			$__sGenSource = $this->parseIncludes($this->sSource);
+			$this->sSource = $this->sRealSource = $__sGenSource;
+			$__aSource = explode(self::TOKEN_LINE, $__sGenSource);
+			$__sCompiled = $__oCache->setCached($this->parseFile($__aSource))->cacheIt()->getFilename();
+		}
+		$__c = $this->execute($__sCompiled, $aContext);
+		return $__c;
+	}
+
 	// Template engine
+	public function parseIncludes($source){
+		do
+		{
+			$__aSource = explode(self::TOKEN_LINE, $source = $__sGenSource = $this->parseBreak($source));
+			$__iIndent = 0;
+			$__iIndentLevel = 0;
+			foreach ($__aSource as $__iKey => $__sLine)
+			{
+				$__iLevel = $this->countLevel($__sLine);
+				if ($__iLevel <= $__iIndentLevel)
+					$__iIndent = $__iIndentLevel = 0;
+				if (preg_match('/\\'.self::TOKEN_LEVEL.'([0-9]+)$/', $__sLine, $__aMatches))
+				{
+					$__iIndent = (int)$__aMatches[1];
+					$__iIndentLevel = $__iLevel;
+					$__sLine = preg_replace('/\\'.self::TOKEN_LEVEL."$__iIndent$/", '', $__sLine);
+				}
+				$__sLine = str_repeat(self::TOKEN_INDENT, $__iIndent * self::INDENT) . $__sLine;
+				$__aSource[$__iKey] = $__sLine;
+				if (preg_match('/^(\s*)'.self::TOKEN_INCLUDE.' (.+)/', $__sLine, $aMatches))
+				{
+					$__sISource = file_get_contents($__sIFile = $this->getFilename($aMatches[2]));
+					if ($this->isDebug())
+						$__sISource = "// Begin file $__sIFile\n$__sISource\n// End file $__sIFile";
+					$__sIncludeSource = $this->sourceIndent($__sISource, $__iIndent ? $__iIndent : $__iLevel);
+					$__sLine = str_replace($aMatches[1] . self::TOKEN_INCLUDE . " {$aMatches[2]}", $__sIncludeSource, $__sLine);
+					$__aSource[$__iKey] = $__sLine;
+				}
+				$source = implode(self::TOKEN_LINE, $__aSource);
+			}
+		} while (preg_match('/(\\'.self::TOKEN_LEVEL.'[0-9]+)|(\s*[^!]'.self::TOKEN_INCLUDE.' .+)/', $source));
+		return $source;
+	}
+
+	public function execute($__sCompiled, $__sContext){
+		// Expand compiled template
+		// set up variables for context
+		foreach ($this->aVariables as $__sName => $__mValue)
+			$$__sName = $__mValue;
+		foreach ($__sContext as $__sName => $__mValue)
+			$$__sName = $__mValue;
+		ob_start();		// start a new output buffer
+		require $__sCompiled;
+		if ($this->isDebug())
+			@unlink($__sCompiled);
+		$__c = rtrim(ob_get_clean()); // capture the result, and discard ob
+		// Call filters
+		foreach ($this->aFilters as $mFilter)
+			$__c = call_user_func($mFilter, $__c);
+		if ($this->isDebug())
+		{
+			header('Content-Type: text/plain');
+			$__a = "\nFile $this->sFile:\n";
+			foreach (explode("\n", $__sGenSource) as $iKey => $sLine)
+				$__a .= 'F' . ($iKey + 1) . ":\t$sLine\n";
+			$__c .= rtrim($__a);
+		}
+		return $__c;
+	}
+
+	/**
+	 * Render the source or file
+	 *
+	 * @see HamlParser::fetch()
+	 * @return string
+	 */
+	public function __toString()
+	{
+		return $this->render();
+	}
+
+	/**
+	 * Parse multiline
+	 *
+	 * @param string File content
+	 * @return string
+	 */
+	protected function parseBreak($sFile)
+	{
+		$sFile = preg_replace('/(\S+) +\\'.self::TOKEN_BREAK.'[ \t]*\n[ \t]*/', '\\1 ', $sFile);
+		return $sFile;
+	}
+
+	/**
+	 * Return source of child
+	 *
+	 * @param integer Level
+	 * @return string
+	 */
+	public function getAsSource($iLevel)
+	{
+		$x = ($this->iIndent - $iLevel - 1) * self::INDENT;
+		$sSource = '';
+		if ($x >= 0)
+			$sSource = preg_replace('|^'.str_repeat(self::TOKEN_INDENT, ($iLevel + 1) * self::INDENT).'|', '', $this->sRealSource);
+		foreach ($this->aChildren as $oChild)
+			$sSource .= self::TOKEN_LINE.$oChild->getAsSource($iLevel);
+		return trim($sSource, self::TOKEN_LINE);
+	}
+
+	/**
+	 * Create and append line to parent
+	 *
+	 * @param string Line
+	 * @param object Parent parser
+	 * @param integer Line number
+	 * @return object
+	 */
+	public function createLine($sLine, $parent, $iLine = null)
+	{
+		$oHaml = new HamlLine($this->sPath, $this->bCompile, $parent, array('line'=>$iLine, 'file'=>$this->sFile));
+		$oHaml->setSource(rtrim($sLine, "\r"));
+		$oHaml->iIndent = $parent->iIndent + 1;
+		$parent->aChildren[] = $oHaml;
+		return $oHaml;
+	}
+
+	/**
+	 * Parse file
+	 *
+	 * @param array Array of source lines
+	 * @return string
+	 */
+	protected function parseFile($aSource)
+	{
+		// Currently "active" HamlParsers at each level.
+		$aLevels = array(-1 => $this);
+		$sCompiled = '';
+		foreach ($aSource as $iKey => $sSource)
+		{
+			// Skip blank lines
+			if(trim($sSource) == "") continue;
+
+			$iLevel = $this->countLevel($sSource);
+			$aLevels[$iLevel] = $this->createLine($sSource, $aLevels[$iLevel - 1], $iKey + 1);
+		}
+		$sCompiled = $this->parseLine('');  // just invokes children recursively
+		// For some reason, spaces keep accumulating behind the else
+		$sCompiled = preg_replace('|<\?php \} \?>\s*<\?php\s+else(\s*if)?|ius', '<?php } else\1 ', $sCompiled);
+		return $sCompiled;
+	}
 
 	/**
 	 * Template variables
@@ -1444,27 +1467,6 @@ class HamlParser
 			else if ($sValue !== null && $sValue !== false)
 				echo " $sName=\"".htmlentities($sValue).'"';
 		}
-	}
-
-	/**
-	 * Export array
-	 *
-	 * @return string
-	 */
-	protected function arrayExport()
-	{
-		$sArray = 'array (';
-		$aArray = $aNArray = array();
-		foreach (func_get_args() as $aArg)
-			$aArray = array_merge($aArray, $aArg);
-		foreach ($aArray as $sKey => $sValue)
-		{
-			if (!preg_match('/[\'$"()]/', $sValue))
-				$sValue = "'$sValue'";
-			$aNArray[] = "'$sKey' => $sValue";
-		}
-		$sArray .= implode(', ', $aNArray).')';
-		return $sArray;
 	}
 }
 

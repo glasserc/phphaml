@@ -50,6 +50,7 @@ final class HamlTests extends PHPUnit_Framework_TestCase
 		$this->assertEquals(0, count($parser2->getVariables()));
 		$this->assertEquals(1, count($this->parser->getVariables()));
 		$parser2->setSource('= $var');
+		$parser2->setTmp(dirname(__FILE__).'/../../tmp/haml');
 		$this->assertEquals("Hello", $parser2->render(array('var' => "Hello")));
 	}
 }

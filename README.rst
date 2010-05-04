@@ -81,3 +81,14 @@ So far the patches included here are:
   was pretty trivial. Additionally, we found it convenient to pass a
   $context array to render(), which is used in addition to
   $this->aVariables, to populate the scope of the HAML code.
+
+* class design: PHPHaml upstream has all HAML processing logic in one
+  huge HamlParser class. It turns out you can decompose this at least
+  a little bit into a HamlLine class, which corresponds roughly to a
+  node in a parse tree, with one line of HAML to compile and some
+  number of children, and a HamlParser that subclasses HamlLine and
+  adds some whole-file code. This is a little easier to work with.
+
+* whitespace eaters. HAML defines two element modifiers that eat
+  whitespace: %foo> and %foo<. PHPHaml upstream supports neither; we
+  only support the outside-the-element eater (%foo>).

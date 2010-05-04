@@ -667,29 +667,6 @@ class HamlParser
 	}
 
 	/**
-	 * Instance for getInstance
-	 *
-	 * @see HamlParser::getInstance()
-	 * @var HamlParser
-	 */
-	protected static $oInstance = null;
-
-	/**
-	 * Implements singleton pattern
-	 *
-	 * @see HamlParser::__construct()
-	 * @param string Path to files
-	 * @param boolean/string Compile templates (can be path)
-	 * @return HamlParser
-	 */
-	protected static function getInstance($sPath = false, $bCompile = true)
-	{
-		if (is_null(self::$oInstance))
-			self::$oInstance = new self($sPath, $bCompile, null, null, true);
-		return self::$oInstance;
-	}
-
-	/**
 	 * Remove white spaces??
 	 *
 	 * @var boolean
@@ -726,7 +703,7 @@ class HamlParser
 		// Dynamic including
 		if (preg_match('/^'.self::TOKEN_INCLUDE.self::TOKEN_PARSE_PHP.' (.*)/', $sSource, $aMatches) && $this->embedCode())
 		{
-			return ($this->isDebug() ? "{$this->aDebug['line']}:\t{$aMatches[1]} == <?php var_export({$aMatches[1]}) ?>\n\n" : '') . "<?php echo \$this->indent(self::getInstance(\$this->sPath, \$this->sTmp)->fetch(\$this->getFilename({$aMatches[1]})), $this->iIndent, true, false); ?>";
+			return ($this->isDebug() ? "{$this->aDebug['line']}:\t{$aMatches[1]} == <?php var_export({$aMatches[1]}) ?>\n\n" : '') . "<?php echo \$this->indent(\$this->fetch(\$this->getFilename({$aMatches[1]})), $this->iIndent, true, false); ?>";
 		} else
 		// Doctype parsing
 		if (preg_match('/^'.self::TOKEN_DOCTYPE.'(.*)/', $sSource, $aMatches))

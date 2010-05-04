@@ -441,6 +441,12 @@ class HamlLine
 	}
 
 	/**
+	 * Whitespace eaters (< and >).
+	 */
+	public $bWhiteSpaceOutside = false;
+	public $bWhiteSpaceInside = false;
+
+	/**
 	 * Parse line
 	 *
 	 * @param string Line
@@ -566,6 +572,10 @@ class HamlLine
 				// Match classes
 				if (preg_match_all('/\\'.self::TOKEN_CLASS.'([a-zA-Z0-9\-_]*)/', $sToParse, $aMatches))
 					$aAttributes['class'] = '\''.implode(' ', $aMatches[1]).'\'';
+				if (preg_match_all('/'.self::TOKEN_WHITESPACE_OUTSIDE.'/', $sToParse, $aMatches))
+					$this->bWhitespaceOutside = true;
+				if (preg_match_all('/'.self::TOKEN_WHITESPACE_INSIDE.'/', $sToParse, $aMatches))
+					$this->bWhitespaceInside = true;
 				// Check for PHP
 				if (preg_match('/'.self::TOKEN_PARSE_PHP.'/', $sToParse))
 				{
@@ -600,6 +610,8 @@ class HamlLine
 					$sAttributes = '<?php $this->writeAttributes('.$this->arrayExport($aAttributes).(!empty($sAutoVar) ? ", \$this->parseSquareBrackets($sAutoVar)" : '' ).(!empty($inline)? ', array(' . implode($inline, ', ').')' : '') . '); ?>';
 				$this->bBlock = $this->oParent->bBlock;
 				$iLevelM = $this->oParent->bBlock || $this->bBlock ? -1 : 0;
+				// FIXME: this whole block is a mess!!!
+				// Needs to be reorganized to handle each orthogonal situation.
 				// Check for closed tag
 				if ($this->isClosed($sTag) || $bClosed)
 					$sParsedBegin = $this->indent("<$sTag$sAttributes />", $iLevelM); else
@@ -650,8 +662,14 @@ class HamlLine
 			}
 		}
 		// Children appending
-		foreach ($this->aChildren as $oChild)
-			$sParsed .= $oChild->parseLine($oChild->sSource);
+		foreach ($this->aChildren as $oChild){
+			$sChild = $oChild->parseLine($oChild->sSource);
+			if($oChild->bWhitespaceOutside){
+				$sParsed = rtrim($sParsed);
+				$sChild = trim($sChild);
+			}
+			$sParsed .= $sChild;
+		}
 		// Check for IE comment
 		if (preg_match('/^\\'.self::TOKEN_COMMENT.'\[(.*?)\](.*)/', $sSource, $aMatches))
 		{
@@ -876,6 +894,16 @@ class HamlLine
 	 * Parse PHP (and display)
 	 */
 	const TOKEN_PARSE_PHP = '=';
+
+	/**
+	 * Whitespace eater: eat outside
+	 */
+	const TOKEN_WHITESPACE_OUTSIDE = '>';
+
+	/**
+	 * Whitespace eater: eat inside
+	 */
+	const TOKEN_WHITESPACE_INSIDE = '<';
 
 	/**
 	 * Set DOCTYPE or XML header (!!! 1.1, !!!, !!! XML)

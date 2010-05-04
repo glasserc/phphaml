@@ -83,4 +83,14 @@ final class HamlSyntaxTests extends PHPUnit_Framework_TestCase
 		$this->parser->setSource("%div\n  Hi\n\n  there");
 		$this->assertEquals("<div>\n  Hi\n  there\n</div>", $this->parser->fetch());
 	}
+
+	public function testWhitespaceEater1(){
+		$this->parser->setSource("%a{:href => 'foo'}> hello\n!");
+		$this->assertEquals('<a href="foo">hello</a>!', $this->parser->fetch());
+	}
+
+	public function testWhitespaceEater2(){
+		$this->parser->setSource("!\n%a{:href => 'foo'}> hello\n!");
+		$this->assertEquals('!<a href="foo">hello</a>!', $this->parser->fetch());
+	}
 }

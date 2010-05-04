@@ -443,8 +443,8 @@ class HamlLine
 	/**
 	 * Whitespace eaters (< and >).
 	 */
-	public $bWhiteSpaceOutside = false;
-	public $bWhiteSpaceInside = false;
+	public $bWhitespaceOutside = false;
+	public $bWhitespaceInside = false;
 
 	/**
 	 * Parse line

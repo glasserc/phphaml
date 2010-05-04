@@ -584,9 +584,8 @@ class HamlParser
 			$iLevel = $this->countLevel($sSource);
 			$aLevels[$iLevel] = $this->createLine($sSource, $aLevels[$iLevel - 1], $iKey + 1);
 		}
-		foreach ($this->aChildren as $oChild)
-			$sCompiled .= $oChild->render();
-		// For some reason, spaces keep accumulating  the else
+		$sCompiled = $this->parseLine('');  // just invokes children recursively
+		// For some reason, spaces keep accumulating behind the else
 		$sCompiled = preg_replace('|<\?php \} \?>\s*<\?php\s+else(\s*if)?|ius', '<?php } else\1 ', $sCompiled);
 		return $sCompiled;
 	}
@@ -797,6 +796,10 @@ class HamlParser
 				$sToParse = $aMatches[1];
 			else
 			{
+				if (strlen($sSource) == 0)
+				{
+					$bParse = false;
+				} else
 				// Check for comment
 				if (!preg_match('/^\\'.self::TOKEN_COMMENT.'(.*)/', $sSource, $aMatches))
 				{
@@ -809,6 +812,7 @@ class HamlParser
 							$sParsed = "$sSource ";
 					else
 						$sParsed = $this->indent($sSource);
+					// FIXME: this probably shouldn't be here
 					foreach ($this->aChildren as $oChild)
 						$sParsed .= $oChild->render();
 				}

@@ -812,9 +812,6 @@ class HamlParser
 							$sParsed = "$sSource ";
 					else
 						$sParsed = $this->indent($sSource);
-					// FIXME: this probably shouldn't be here
-					foreach ($this->aChildren as $oChild)
-						$sParsed .= $oChild->render();
 				}
 				else
 				{

@@ -806,7 +806,7 @@ class HamlLine
 	 */
 	protected function countLevel($sLine)
 	{
-		$spaces = (strlen($sLine) - strlen(trim($sLine, self::TOKEN_INDENT)));
+		$spaces = (strlen($sLine) - strlen(ltrim($sLine, self::TOKEN_INDENT)));
 		if($spaces % self::INDENT != 0){
 			throw new HamlException("Invalid indent on line '$sLine': $spaces space(s) (needed multiple of " . self::INDENT . ")");
 		}
